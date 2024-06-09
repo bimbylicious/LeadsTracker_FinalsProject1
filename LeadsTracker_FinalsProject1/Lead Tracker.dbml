@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Lead Tracker" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-F726TKR\SQLEXPRESS;Initial Catalog=&quot;Lead Tracker&quot;;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False" SettingsObjectName="LeadsTracker_FinalsProject1.Properties.Settings" SettingsPropertyName="Lead_TrackerConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Documents" Member="Documents">
+    <Type Name="Document">
+      <Column Name="Documents_ID" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Picture" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Birth_Certificate" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Good_Moral" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="TOR" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Medical_Clearance" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Report_Card" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Leads" Member="Leads">
+    <Type Name="Lead">
+      <Column Name="Lead_ID" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Lead_Source" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Lead_Name" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Lead_Email" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Phone_Number" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Documents_ID" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Lead_Status" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Interview_Date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Staff" Member="Staffs">
+    <Type Name="Staff">
+      <Column Name="Staff_ID" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Staff_Name" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Staff_Username" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Staff_Password" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="Staff_Role" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
