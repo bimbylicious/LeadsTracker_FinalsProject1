@@ -7,7 +7,38 @@
         mc:Ignorable="d"
         Title="Menu" Height="450" Width="800">
     <Grid>
-        <Button x:Name ="view" Content="Change View" HorizontalAlignment="Left" Margin="717,10,0,0" VerticalAlignment="Top" Click="viewButton_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="10">
+            <Button x:Name ="signoutButton" Content="Sign Out" HorizontalAlignment="Left" Click="signoutButton_Click"/>
+            <Button x:Name ="viewButton" Content="Change view" HorizontalAlignment="Right" Click="viewButton_Click"/>
+            <TextBlock Text="Leads Summary" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="Total Leads" FontWeight="Bold"/>
+                    <TextBlock Text="100" FontSize="24" Foreground="Blue"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <TextBlock Text="New Leads" FontWeight="Bold"/>
+                    <TextBlock Text="25" FontSize="24" Foreground="Green"/>
+                </StackPanel>
+
+                <StackPanel>
+                    <TextBlock Text="Closed Leads" FontWeight="Bold"/>
+                    <TextBlock Text="50" FontSize="24" Foreground="Red"/>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBlock Text="Upcoming Follow-ups" FontWeight="Bold" FontSize="16" Margin="0,20,0,10"/>
+            <ListBox Height="100"/>
+
+        </StackPanel>
+        <Button Content="Table View" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40" Click="Button_Click"/>
     </Grid>
 </Window>

@@ -30,5 +30,17 @@ namespace LeadsTracker_FinalsProject1
             w1.Show();
             this.Close();
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Menutable w1 = new Menutable();
+            w1.Show();
+            this.Close();
+        }
+        private void signoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow w2 = new MainWindow();
+            w2.Show();
+            this.Close();
+        }
     }
 }

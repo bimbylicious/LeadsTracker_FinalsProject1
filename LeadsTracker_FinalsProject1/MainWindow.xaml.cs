@@ -78,6 +78,39 @@ namespace LeadsTracker_FinalsProject1
                 MessageBox.Show("Please input username and/or password");
             }
         }
+        private void UsernameBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (UsernameBox.Text == "Username")
+            {
+                UsernameBox.Text = "";
+                UsernameBox.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+        private void UsernameBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (UsernameBox.Text == "")
+            {
+                UsernameBox.Text = "Username";
+                UsernameBox.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+        }
+        private void PasswordBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox.Text == "Password")
+            {
+                PasswordBox.Text = "";
+                PasswordBox.Foreground = new SolidColorBrush(Colors.Black);
+            }
+        }
+
+        private void PasswordBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PasswordBox.Text == "")
+            {
+                PasswordBox.Text = "Password";
+                PasswordBox.Foreground = new SolidColorBrush(Colors.Gray);
+            }
+        }
 
 
     }

@@ -7,12 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="237,94,0,0" TextWrapping="Wrap" Text="SOUTHVILLE LEADS TRACKER SYSTEM" VerticalAlignment="Top" Height="38" FontSize="20"/>
-        <TextBox x:Name="UsernameBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="322" Height="28" Margin="244,167,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="244,146,0,0" TextWrapping="Wrap" Text="Username:" VerticalAlignment="Top" Width="58"/>
-        <TextBox x:Name="PasswordBox" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="322" Height="28" Margin="244,238,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="244,217,0,0" TextWrapping="Wrap" Text="Password:" VerticalAlignment="Top" Width="58"/>
-        <Button x:Name="LoginBtn" Content="LOGIN" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Width="74" Click="LoginBtn_Click"/>
+        <Grid.Background>
+            <ImageBrush Opacity="0.6" ImageSource="SouthvilleBG.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="150*"/>
+            <RowDefinition Height="377*"/>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" Text="SOUTHVILLE LEADS TRACKER SYSTEM" VerticalAlignment="Top" Height="76" FontSize="28" Width="283" Grid.Row="2"/>
+        <TextBox x:Name="UsernameBox" FontSize="16" FontWeight="DemiBold" VerticalContentAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="245" Height="38" Margin="0,116,0,0" Grid.Row="2" Foreground="#FF9C9C9C" GotFocus="UsernameBox_GotFocus" LostFocus="UsernameBox_LostFocus"/>
+        <TextBox x:Name="PasswordBox" FontSize="16" FontWeight="DemiBold" VerticalContentAlignment="Center" HorizontalAlignment="Center" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="245" Height="38" Grid.Row="2" Foreground="#FF9C9C9C" GotFocus="PasswordBox_GotFocus" LostFocus="PasswordBox_LostFocus" Margin="0,178,0,0"/>
+        <Button x:Name="LoginBtn" FontWeight="Bold" FontSize="13" Content="LOGIN" HorizontalAlignment="Center" Margin="0,245,0,0" VerticalAlignment="Top" Width="85" Click="LoginBtn_Click" Height="30" Grid.Row="2" Background="#FF750000" Foreground="White"/>
+        <Image Margin="330,8,330,0" Source="Southville Logo.png" Stretch="Fill" Grid.Row="1"/>
 
     </Grid>
 </Window>
