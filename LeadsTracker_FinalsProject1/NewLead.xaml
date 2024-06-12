@@ -1,0 +1,28 @@
+﻿<Window x:Class="LeadsTracker_FinalsProject1.NewLead"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
+        mc:Ignorable="d"
+        Title="NewLead" Height="450" Width="800">
+    <Grid>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="81,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="81,184,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="81,251,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="280,251,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="280,184,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="280,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox HorizontalAlignment="Left" Margin="481,129,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="159" Height="140"/>
+        <Label Content="Lead Name" HorizontalAlignment="Left" Margin="106,98,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lead Source" HorizontalAlignment="Left" Margin="104,153,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lead Email" HorizontalAlignment="Left" Margin="108,225,0,0" VerticalAlignment="Top"/>
+        <Label Content="Phone Number" HorizontalAlignment="Left" Margin="295,98,0,0" VerticalAlignment="Top"/>
+        <Label Content="Interview Date" HorizontalAlignment="Left" Margin="297,220,0,0" VerticalAlignment="Top"/>
+        <Label Content="Lead Status" HorizontalAlignment="Left" Margin="305,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Notes" HorizontalAlignment="Left" Margin="522,98,0,0" VerticalAlignment="Top"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="530,286,0,0" VerticalAlignment="Top" Click="Button_Click" Width="61"/>
+
+    </Grid>
+</Window>

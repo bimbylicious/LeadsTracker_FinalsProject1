@@ -31,6 +31,8 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBox HorizontalAlignment="Left" Margin="1258,12,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="1378,568,0,0" VerticalAlignment="Top" Width="77" Height="24" Click="saveButton_Click"/>
+        <Button x:Name="remove" Content="Remove lead" HorizontalAlignment="Left" Margin="22,568,0,0" VerticalAlignment="Top" Width="89" Height="24" Click="removeButton_Click"/>
 
     </Grid>
 </Window>

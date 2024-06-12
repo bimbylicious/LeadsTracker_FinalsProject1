@@ -56,6 +56,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Documents.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -63,6 +67,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents.xaml.cs">
+      <DependentUpon>Documents.xaml</DependentUpon>
     </Compile>
     <Compile Include="Lead Tracker.designer.cs">
       <AutoGen>True</AutoGen>
@@ -81,6 +88,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="NewLead.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Menu.xaml.cs">
@@ -88,6 +99,9 @@
     </Compile>
     <Compile Include="Menutable.xaml.cs">
       <DependentUpon>Menutable.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewLead.xaml.cs">
+      <DependentUpon>NewLead.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
