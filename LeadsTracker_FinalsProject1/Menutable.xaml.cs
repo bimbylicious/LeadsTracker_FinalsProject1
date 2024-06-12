@@ -112,6 +112,19 @@ namespace LeadsTracker_FinalsProject1
                     connection.Open();
                     command.ExecuteNonQuery();
                 }
+
+
+                string queryDeleteDocument = "DELETE FROM Documents WHERE Documents_ID = @Documents_ID;";
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(queryDeleteDocument, connection);
+                    command.Parameters.AddWithValue("@Documents_ID", leadID);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Lead and corresponding documents deleted successfully.", "Lead Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -179,6 +192,20 @@ namespace LeadsTracker_FinalsProject1
                     commandInsert.Parameters.AddWithValue("@Interview_Date", newLead.Interview_Date ?? (object)DBNull.Value);
 
                     commandInsert.ExecuteNonQuery();
+
+                    string queryInsertDocument = "INSERT INTO Documents (Documents_ID, Picture, Birth_Certificate, Good_Moral, TOR, Medical_Clearance, Report_Card) " +
+                             "VALUES (@Documents_ID, @Picture, @Birth_Certificate, @Good_Moral, @TOR, @Medical_Clearance, @Report_Card);";
+
+                    SqlCommand commandInsertDocument = new SqlCommand(queryInsertDocument, connection);
+                    commandInsertDocument.Parameters.AddWithValue("@Documents_ID", nextLeadID);
+                    commandInsertDocument.Parameters.AddWithValue("@Picture", $@"C:\Users\PC\OneDrive\Pictures\documents\Picture\{nextLeadID}");
+                    commandInsertDocument.Parameters.AddWithValue("@Birth_Certificate", $@"C:\Users\PC\OneDrive\Pictures\documents\Birth_Certificate\{nextLeadID}");
+                    commandInsertDocument.Parameters.AddWithValue("@Good_Moral", $@"C:\Users\PC\OneDrive\Pictures\documents\Good_Moral\{nextLeadID}");
+                    commandInsertDocument.Parameters.AddWithValue("@TOR", $@"C:\Users\PC\OneDrive\Pictures\documents\TOR\{nextLeadID}");
+                    commandInsertDocument.Parameters.AddWithValue("@Medical_Clearance", $@"C:\Users\PC\OneDrive\Pictures\documents\Medical_Clearance\{nextLeadID}");
+                    commandInsertDocument.Parameters.AddWithValue("@Report_Card", $@"C:\Users\PC\OneDrive\Pictures\documents\Report_Card\{nextLeadID}");
+
+                    commandInsertDocument.ExecuteNonQuery();
                 }
             }
             catch (Exception ex)
