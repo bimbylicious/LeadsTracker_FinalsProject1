@@ -32,7 +32,7 @@ namespace LeadsTracker_FinalsProject1
             try
             {
                 // Define your connection string (update it with your actual database connection string)
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
 
                 // Define your query
                 string query = "SELECT * FROM Leads;";
@@ -101,7 +101,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
                 string query = "DELETE FROM Leads WHERE Lead_ID = @Lead_ID;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -164,7 +164,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -237,6 +237,65 @@ namespace LeadsTracker_FinalsProject1
             public string Documents_ID { get; set; }
             public string Lead_Status { get; set; }
             public string Interview_Date { get; set; }
+        }
+
+        private void LeadDocuments_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridXAML.SelectedItem is Lead selectedLead)
+            {
+                var document = GetDocumentForLead(selectedLead.Documents_ID);
+                if (document != null)
+                {
+                    Documents docu = new Documents(document);
+                    docu.Show();
+                }
+                else
+                {
+                    MessageBox.Show("No documents found for the selected lead.", "No Documents", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a lead to view documents.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+        private Document GetDocumentForLead(string documentsId)
+        {
+            Document document = null;
+
+            try
+            {
+                string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Documents_ID", documentsId);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        document = new Document
+                        {
+                            Documents_ID = reader["Documents_ID"].ToString(),
+                            Picture = reader["Picture"].ToString(),
+                            Birth_Certificate = reader["Birth_Certificate"].ToString(),
+                            Good_Moral = reader["Good_Moral"].ToString(),
+                            TOR = reader["TOR"].ToString(),
+                            Medical_Clearance = reader["Medical_Clearance"].ToString(),
+                            Report_Card = reader["Report_Card"].ToString()
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
+            return document;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace LeadsTracker_FinalsProject1
     /// </summary>
     public partial class MainWindow : Window
     {
-        DataClasses1DataContext _ltDC = null;
+        Lead_TrackerDataContext _ltDC = null;
         string userName = "";
         bool loginFlag = false;
 
@@ -30,7 +30,7 @@ namespace LeadsTracker_FinalsProject1
         {
             InitializeComponent();
 
-            _ltDC = new DataClasses1DataContext(
+            _ltDC = new Lead_TrackerDataContext(
                 Properties.Settings.Default.Lead_TrackerConnectionString);
         }
 

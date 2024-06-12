@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
-        Title="Menutable" Height="650" Width="1500">
+        Title="Menutable" Height="650" Width="1500" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name ="view" Content="Change view" HorizontalAlignment="Left" Margin="1419,10,0,0" VerticalAlignment="Top" Click="viewButton_Click"/>
         <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Width="1456" Height="498" CanUserResizeColumns="False" AutoGenerateColumns="False">
@@ -33,6 +33,7 @@
         <TextBox HorizontalAlignment="Left" Margin="1258,12,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="1378,568,0,0" VerticalAlignment="Top" Width="77" Height="24" Click="saveButton_Click"/>
         <Button x:Name="remove" Content="Remove lead" HorizontalAlignment="Left" Margin="22,568,0,0" VerticalAlignment="Top" Width="89" Height="24" Click="removeButton_Click"/>
+        <Button x:Name="LeadDocuments" Content="View Lead Documents" HorizontalAlignment="Center" Margin="0,570,0,0" VerticalAlignment="Top" Click="LeadDocuments_Click"/>
 
     </Grid>
 </Window>
