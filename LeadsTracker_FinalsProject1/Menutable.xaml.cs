@@ -34,7 +34,7 @@ namespace LeadsTracker_FinalsProject1
             try
             {
                 // Define your connection string (update it with your actual database connection string)
-                string connectionString = "Data Source=CCL02-30;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
 
                 // Define your query
                 string query = "SELECT * FROM Leads;";
@@ -142,7 +142,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=CCL02-30;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
                 string query = "DELETE FROM Leads WHERE Lead_ID = @Lead_ID;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -205,7 +205,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=CCL02-30;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -306,7 +306,7 @@ namespace LeadsTracker_FinalsProject1
 
             try
             {
-                string connectionString = "Data Source=CCL02-30;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
                 string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))

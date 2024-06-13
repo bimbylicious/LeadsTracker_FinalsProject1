@@ -26,7 +26,7 @@ namespace LeadsTracker_FinalsProject1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CCL02-30;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Conn" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CCL01-37;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Conn" +
             "ect Timeout=30;Encrypt=False;TrustServerCertificate=True")]
         public string Lead_TrackerConnectionString {
             get {
