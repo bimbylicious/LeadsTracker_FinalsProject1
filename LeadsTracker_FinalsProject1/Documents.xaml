@@ -7,17 +7,29 @@
         mc:Ignorable="d"
         Title="Documents" Height="450" Width="800" WindowStartupLocation="CenterScreen">
     <Grid Background="#FFE698FC">
-        <TextBlock Text="Picture" HorizontalAlignment="Left" Margin="114,64,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="Picture" HorizontalAlignment="Left" Height="100" Margin="114,84,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock Text="Birth Certificate" HorizontalAlignment="Left" Margin="336,64,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="Birth_Certificate" HorizontalAlignment="Left" Height="100" Margin="336,84,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock Text="Good Moral" HorizontalAlignment="Left" Margin="619,64,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="Good_Moral" HorizontalAlignment="Left" Height="100" Margin="619,84,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock Text="TOR" HorizontalAlignment="Left" Margin="114,245,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="TOR" HorizontalAlignment="Left" Height="100" Margin="114,265,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock Text="Medical Clearance" HorizontalAlignment="Left" Margin="336,266,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="Medical_Clearance" HorizontalAlignment="Left" Height="100" Margin="336,286,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBlock Text="Report Card" HorizontalAlignment="Left" Margin="608,245,0,0" VerticalAlignment="Top"/>
-        <Image x:Name="Report_Card" HorizontalAlignment="Left" Height="100" Margin="608,265,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBlock Text="Picture" HorizontalAlignment="Left" Margin="107,63,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Image x:Name="Picture" HorizontalAlignment="Left" Height="100" Margin="79,84,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
+        <TextBlock Text="Birth Certificate" HorizontalAlignment="Left" Margin="336,63,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Image x:Name="Birth_Certificate" HorizontalAlignment="Left" Height="100" Margin="331,84,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
+        <TextBlock Text="Good Moral" HorizontalAlignment="Left" Margin="626,63,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Image x:Name="Good_Moral" HorizontalAlignment="Left" Height="100" Margin="608,84,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
+        <TextBlock Text="TOR" HorizontalAlignment="Left" Margin="115,245,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.187" FontWeight="Bold"/>
+        <Image x:Name="TOR" HorizontalAlignment="Left" Height="100" Margin="79,265,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
+        <TextBlock Text="Medical Clearance" HorizontalAlignment="Left" Margin="329,245,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Image x:Name="Medical_Clearance" HorizontalAlignment="Left" Height="100" Margin="331,265,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
+        <TextBlock Text="Report Card" HorizontalAlignment="Left" Margin="626,244,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Image x:Name="Report_Card" HorizontalAlignment="Left" Height="100" Margin="610,265,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
+        <Button x:Name="Camera_Picture" Content="Camera" HorizontalAlignment="Left" Margin="69,197,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="FileUpload_Picture" Content="File Upload" HorizontalAlignment="Left" Margin="129,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
+        <Button x:Name="Camera_Picture_Copy" Content="Camera" HorizontalAlignment="Left" Margin="321,197,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="FileUpload_Picture_Copy" Content="File Upload" HorizontalAlignment="Left" Margin="381,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
+        <Button x:Name="Camera_Picture_Copy1" Content="Camera" HorizontalAlignment="Left" Margin="600,197,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="FileUpload_Picture_Copy1" Content="File Upload" HorizontalAlignment="Left" Margin="660,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
+        <Button x:Name="Camera_Picture_Copy2" Content="Camera" HorizontalAlignment="Left" Margin="69,379,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="FileUpload_Picture_Copy2" Content="File Upload" HorizontalAlignment="Left" Margin="129,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
+        <Button x:Name="Camera_Picture_Copy3" Content="Camera" HorizontalAlignment="Left" Margin="321,379,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="FileUpload_Picture_Copy3" Content="File Upload" HorizontalAlignment="Left" Margin="381,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
+        <Button x:Name="Camera_Picture_Copy4" Content="Camera" HorizontalAlignment="Left" Margin="600,379,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="FileUpload_Picture_Copy4" Content="File Upload" HorizontalAlignment="Left" Margin="660,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
     </Grid>
 </Window>
