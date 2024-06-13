@@ -145,5 +145,8 @@
   <ItemGroup>
     <Resource Include="SouthvilleBG.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="NO IMAGE FOUND.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

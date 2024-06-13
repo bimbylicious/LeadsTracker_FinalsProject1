@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace LeadsTracker_FinalsProject1
 
         private void LoadDocumentImages(Document document)
         {
+
             if (!string.IsNullOrEmpty(document.Picture))
             {
                 Picture.Source = new BitmapImage(new Uri(document.Picture, UriKind.Absolute));
@@ -52,6 +54,21 @@ namespace LeadsTracker_FinalsProject1
             {
                 Report_Card.Source = new BitmapImage(new Uri(document.Report_Card, UriKind.Absolute));
             }
+        }
+        private void Image_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Browse Photos...";
+            ofd.DefaultExt = "png";
+            ofd.Filter = "Images (*.BMP;*.JPG;*.GIF,*.PNG,*.TIFF)|*.BMP;*.JPG;*.GIF;*.PNG;*.TIFF|" +
+                "All files (*.*)|*.*";
+
+            ofd.ShowDialog();
+
+            //if (ofd.FileName.Length > 0)
+            //{
+            //    txtPath.Text = ofd.FileName;
+            //}
         }
     }
 }
