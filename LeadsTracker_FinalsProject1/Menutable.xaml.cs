@@ -76,6 +76,44 @@ namespace LeadsTracker_FinalsProject1
             }
         }
 
+        private void FilterChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void ApplyFilters()
+        {
+            if (originalLeads == null)
+            {
+                return;
+            }
+
+            string searchText = search.Text.Trim().ToLower();
+            string selectedSource = sourceFilter.SelectedItem is ComboBoxItem sourceItem ? sourceItem.Content.ToString() : "";
+            string selectedStatus = statusFilter.SelectedItem is ComboBoxItem statusItem ? statusItem.Content.ToString() : "";
+
+            var filteredLeads = originalLeads.Where(lead =>
+                (string.IsNullOrEmpty(searchText) ||
+                    lead.Lead_Name.ToLower().Contains(searchText) ||
+                    lead.Lead_Email.ToLower().Contains(searchText) ||
+                    lead.Phone_Number.ToLower().Contains(searchText) ||
+                    lead.Lead_Source.ToLower().Contains(searchText) ||
+                    lead.Notes.ToLower().Contains(searchText) ||
+                    lead.Lead_Status.ToLower().Contains(searchText)) &&
+                (string.IsNullOrEmpty(selectedSource) || lead.Lead_Source == selectedSource) &&
+                (string.IsNullOrEmpty(selectedStatus) || lead.Lead_Status == selectedStatus)
+            ).ToList();
+
+            DataGridXAML.ItemsSource = null;
+            DataGridXAML.ItemsSource = filteredLeads;
+        }
+
+
         private void removeButton_Click(object sender, RoutedEventArgs e)
         {
             if (DataGridXAML.SelectedItem is Lead selectedLead)
@@ -301,43 +339,43 @@ namespace LeadsTracker_FinalsProject1
             return document;
         }
 
-        private void search_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Clear search box text when it receives focus
-            search.GotFocus += (s, ev) => { search.Text = ""; };
+        //private void search_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    // Clear search box text when it receives focus
+        //    search.GotFocus += (s, ev) => { search.Text = ""; };
 
-            // Check if originalLeads is null
-            if (originalLeads == null)
-            {
-                return;
-            }
+        //    // Check if originalLeads is null
+        //    if (originalLeads == null)
+        //    {
+        //        return;
+        //    }
 
-            string searchText = search.Text.Trim().ToLower();
-            List<Lead> filteredLeads;
+        //    string searchText = search.Text.Trim().ToLower();
+        //    List<Lead> filteredLeads;
 
-            if (string.IsNullOrEmpty(searchText))
-            {
-                // If search box is empty, restore original data
-                filteredLeads = originalLeads;
-            }
-            else
-            {
-                // Filter data based on search text
-                filteredLeads = originalLeads
-                    .Where(lead =>
-                        lead.Lead_ID.ToLower().Contains(searchText) ||
-                        lead.Lead_Name.ToLower().Contains(searchText) ||
-                        lead.Lead_Email.ToLower().Contains(searchText) ||
-                        lead.Phone_Number.ToLower().Contains(searchText) ||
-                        lead.Lead_Source.ToLower().Contains(searchText) ||
-                        lead.Notes.ToLower().Contains(searchText) ||
-                        lead.Lead_Status.ToLower().Contains(searchText))
-                    .ToList();
-            }
+        //    if (string.IsNullOrEmpty(searchText))
+        //    {
+        //        // If search box is empty, restore original data
+        //        filteredLeads = originalLeads;
+        //    }
+        //    else
+        //    {
+        //        // Filter data based on search text
+        //        filteredLeads = originalLeads
+        //            .Where(lead =>
+        //                lead.Lead_ID.ToLower().Contains(searchText) ||
+        //                lead.Lead_Name.ToLower().Contains(searchText) ||
+        //                lead.Lead_Email.ToLower().Contains(searchText) ||
+        //                lead.Phone_Number.ToLower().Contains(searchText) ||
+        //                lead.Lead_Source.ToLower().Contains(searchText) ||
+        //                lead.Notes.ToLower().Contains(searchText) ||
+        //                lead.Lead_Status.ToLower().Contains(searchText))
+        //            .ToList();
+        //    }
 
-            // Update DataGrid with filtered data
-            DataGridXAML.ItemsSource = null; // Clear the existing items source
-            DataGridXAML.ItemsSource = filteredLeads; // Set the new items source
-        }
+        //    // Update DataGrid with filtered data
+        //    DataGridXAML.ItemsSource = null; // Clear the existing items source
+        //    DataGridXAML.ItemsSource = filteredLeads; // Set the new items source
+        //}
     }
 }

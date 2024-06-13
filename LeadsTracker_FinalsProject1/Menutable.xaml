@@ -8,7 +8,7 @@
         Title="Menutable" Height="650" Width="1500" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name ="view" Content="Change view" HorizontalAlignment="Left" Margin="1419,10,0,0" VerticalAlignment="Top" Click="viewButton_Click"/>
-        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Center" Margin="0,45,0,0" VerticalAlignment="Top" Width="1456" Height="498" CanUserResizeColumns="False" AutoGenerateColumns="False">
+        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="DarkTurquoise"/>
@@ -30,10 +30,26 @@
                 <DataGridTextColumn Header="Interview Date" Width="136" Binding="{Binding Interview_Date}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="1258,12,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged"/>
+        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="168,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="22"/>
         <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="1378,568,0,0" VerticalAlignment="Top" Width="77" Height="24" Click="saveButton_Click"/>
         <Button x:Name="remove" Content="Remove lead" HorizontalAlignment="Left" Margin="22,568,0,0" VerticalAlignment="Top" Width="89" Height="24" Click="removeButton_Click"/>
         <Button x:Name="LeadDocuments" Content="View Lead Documents" HorizontalAlignment="Center" Margin="0,570,0,0" VerticalAlignment="Top" Click="LeadDocuments_Click"/>
+        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="355,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="FilterChanged">
+            <ComboBoxItem Content=""/>
+            <ComboBoxItem Content="Facebook"/>
+            <ComboBoxItem Content="Instagram"/>
+            <ComboBoxItem Content="Twitter"/>
+            <ComboBoxItem Content="Referral"/>
+            <ComboBoxItem Content="Physical ads"/>
+        </ComboBox>
+        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="510,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="FilterChanged">
+            <ComboBoxItem Content=""/>
+            <ComboBoxItem Content="Cold"/>
+            <ComboBoxItem Content="Warm"/>
+            <ComboBoxItem Content="Hot"/>
+        </ComboBox>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="392,2,0,0" VerticalAlignment="Top"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="549,4,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
