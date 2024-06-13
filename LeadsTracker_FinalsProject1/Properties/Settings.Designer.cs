@@ -12,7 +12,7 @@ namespace LeadsTracker_FinalsProject1.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,8 +26,8 @@ namespace LeadsTracker_FinalsProject1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated " +
-            "Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CCL02-30;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Conn" +
+            "ect Timeout=30;Encrypt=False;TrustServerCertificate=True")]
         public string Lead_TrackerConnectionString {
             get {
                 return ((string)(this["Lead_TrackerConnectionString"]));
