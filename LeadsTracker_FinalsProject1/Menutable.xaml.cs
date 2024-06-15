@@ -285,56 +285,49 @@ namespace LeadsTracker_FinalsProject1
             if (DataGridXAML.SelectedItem is Lead selectedLead)
             {
                 var document = GetDocumentForLead(selectedLead.Documents_ID);
-                if (document != null)
-                {
-                    Documents docu = new Documents(document);
-                    docu.Show();
-                }
-                else
-                {
-                    MessageBox.Show("No documents found for the selected lead.", "No Documents", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                Documents docu = new Documents(document);
+                docu.Show();
             }
             else
             {
                 MessageBox.Show("Please select a lead to view documents.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-        private Document GetDocumentForLead(string documentsId)
-        {
-            Document document = null;
+		private Document GetDocumentForLead(string documentsId)
+		{
+			Document document = null;
 
             try
             {
                 string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
                 string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Documents_ID", documentsId);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+				using (SqlConnection connection = new SqlConnection(connectionString))
+				{
+					SqlCommand command = new SqlCommand(query, connection);
+					command.Parameters.AddWithValue("@Documents_ID", documentsId);
+					connection.Open();
+					SqlDataReader reader = command.ExecuteReader();
 
-                    if (reader.Read())
-                    {
-                        document = new Document
-                        {
-                            Documents_ID = reader["Documents_ID"].ToString(),
-                            Picture = reader["Picture"].ToString(),
-                            Birth_Certificate = reader["Birth_Certificate"].ToString(),
-                            Good_Moral = reader["Good_Moral"].ToString(),
-                            TOR = reader["TOR"].ToString(),
-                            Medical_Clearance = reader["Medical_Clearance"].ToString(),
-                            Report_Card = reader["Report_Card"].ToString()
-                        };
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
+					if (reader.Read())
+					{
+						document = new Document
+						{
+							Documents_ID = reader["Documents_ID"].ToString(),
+							Picture = reader["Picture"] != DBNull.Value ? reader["Picture"].ToString() : null,
+							Birth_Certificate = reader["Birth_Certificate"] != DBNull.Value ? reader["Birth_Certificate"].ToString() : null,
+							Good_Moral = reader["Good_Moral"] != DBNull.Value ? reader["Good_Moral"].ToString() : null,
+							TOR = reader["TOR"] != DBNull.Value ? reader["TOR"].ToString() : null,
+							Medical_Clearance = reader["Medical_Clearance"] != DBNull.Value ? reader["Medical_Clearance"].ToString() : null,
+							Report_Card = reader["Report_Card"] != DBNull.Value ? reader["Report_Card"].ToString() : null
+						};
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occurred: " + ex.Message);
+			}
 
             return document;
         }
