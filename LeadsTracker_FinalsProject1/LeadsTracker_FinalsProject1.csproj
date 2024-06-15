@@ -68,13 +68,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Documents.xaml.cs">
-      <DependentUpon>Documents.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Lead Tracker.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Lead Tracker.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Documents.xaml.cs">
+      <DependentUpon>Documents.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -147,6 +147,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="NO IMAGE FOUND.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="search-magnifying-glass-icon-13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="search-magnifying-glass-icon-13-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="th.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -34,7 +34,7 @@ namespace LeadsTracker_FinalsProject1
             try
             {
                 // Define your connection string (update it with your actual database connection string)
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
                 // Define your query
                 string query = "SELECT * FROM Leads;";
@@ -142,7 +142,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
                 string query = "DELETE FROM Leads WHERE Lead_ID = @Lead_ID;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -205,7 +205,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -306,7 +306,7 @@ namespace LeadsTracker_FinalsProject1
 
             try
             {
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
                 string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -338,44 +338,5 @@ namespace LeadsTracker_FinalsProject1
 
             return document;
         }
-
-        //private void search_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    // Clear search box text when it receives focus
-        //    search.GotFocus += (s, ev) => { search.Text = ""; };
-
-        //    // Check if originalLeads is null
-        //    if (originalLeads == null)
-        //    {
-        //        return;
-        //    }
-
-        //    string searchText = search.Text.Trim().ToLower();
-        //    List<Lead> filteredLeads;
-
-        //    if (string.IsNullOrEmpty(searchText))
-        //    {
-        //        // If search box is empty, restore original data
-        //        filteredLeads = originalLeads;
-        //    }
-        //    else
-        //    {
-        //        // Filter data based on search text
-        //        filteredLeads = originalLeads
-        //            .Where(lead =>
-        //                lead.Lead_ID.ToLower().Contains(searchText) ||
-        //                lead.Lead_Name.ToLower().Contains(searchText) ||
-        //                lead.Lead_Email.ToLower().Contains(searchText) ||
-        //                lead.Phone_Number.ToLower().Contains(searchText) ||
-        //                lead.Lead_Source.ToLower().Contains(searchText) ||
-        //                lead.Notes.ToLower().Contains(searchText) ||
-        //                lead.Lead_Status.ToLower().Contains(searchText))
-        //            .ToList();
-        //    }
-
-        //    // Update DataGrid with filtered data
-        //    DataGridXAML.ItemsSource = null; // Clear the existing items source
-        //    DataGridXAML.ItemsSource = filteredLeads; // Set the new items source
-        //}
     }
 }

@@ -47,9 +47,12 @@
             <ComboBoxItem Content="Cold"/>
             <ComboBoxItem Content="Warm"/>
             <ComboBoxItem Content="Hot"/>
+            <ComboBoxItem Content="Dead"/>
         </ComboBox>
         <Label Content="Source" HorizontalAlignment="Left" Margin="392,2,0,0" VerticalAlignment="Top"/>
         <Label Content="Status" HorizontalAlignment="Left" Margin="549,4,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="406,273,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image Margin="168,28,1309,585" Source="/th.jpg" Stretch="Fill"/>
 
     </Grid>
 </Window>

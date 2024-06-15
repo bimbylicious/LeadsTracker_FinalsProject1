@@ -6,39 +6,98 @@
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
         Title="Menu" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Grid Height="434" VerticalAlignment="Bottom">
 
-        <StackPanel Orientation="Vertical" Grid.Row="0" Margin="10">
-            <Button x:Name ="signoutButton" Content="Sign Out" HorizontalAlignment="Left" Click="signoutButton_Click"/>
-            <Button x:Name ="viewButton" Content="Change view" HorizontalAlignment="Right" Click="viewButton_Click"/>
-            <TextBlock Text="Leads Summary" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+        <Button x:Name ="signoutButton" Content="Sign Out" HorizontalAlignment="Left" Click="signoutButton_Click" Margin="10,20,0,394"/>
+        <Button x:Name ="viewButton" Content="Change view" HorizontalAlignment="Right" Click="viewButton_Click" Margin="0,20,10,394"/>
+        <TextBlock Text="Leads Summary" FontWeight="Bold" FontSize="16" Margin="10,40,654,363" RenderTransformOrigin="0.493,0.71"/>
 
+        <TextBlock Text="Total Leads" FontWeight="Bold" Margin="10,79,710,332"/>
+        <TextBlock x:Name="totalCounter" Text="100" FontSize="24" Foreground="Blue" Margin="10,95,720,313"/>
 
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="0,0,20,0">
-                    <TextBlock Text="Total Leads" FontWeight="Bold"/>
-                    <TextBlock Text="100" FontSize="24" Foreground="Blue"/>
-                </StackPanel>
+        <TextBlock Text="New Leads" FontWeight="Bold" Margin="90,80,635,330"/>
+        <TextBlock x:Name="newCounter" Text="25" FontSize="24" Foreground="Green" Margin="90,93,664,304"/>
 
-                <StackPanel Margin="0,0,20,0">
-                    <TextBlock Text="New Leads" FontWeight="Bold"/>
-                    <TextBlock Text="25" FontSize="24" Foreground="Green"/>
-                </StackPanel>
+        <TextBlock Text="Dead Leads" FontWeight="Bold" Margin="170,81,551,331" RenderTransformOrigin="0.5,0.5">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.302"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <TextBlock x:Name="closedCounter" Text="50" FontSize="24" Foreground="Red" Margin="170,93,584,312"/>
 
-                <StackPanel>
-                    <TextBlock Text="Closed Leads" FontWeight="Bold"/>
-                    <TextBlock Text="50" FontSize="24" Foreground="Red"/>
-                </StackPanel>
-            </StackPanel>
+        <TextBlock Text="Leads" FontWeight="Bold" FontSize="16" Margin="10,126,746,287"/>
 
-            <TextBlock Text="Upcoming Follow-ups" FontWeight="Bold" FontSize="16" Margin="0,20,0,10"/>
-            <ListBox Height="100"/>
+        <ListBox x:Name="leadList" ItemsSource="{Binding Leads}" SelectedItem="{Binding SelectedLead}" Margin="10,174,417,10" Width="Auto">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Lead_ID}" FontWeight="Bold" Margin="5"/>
+                        <TextBlock Text="{Binding Lead_Name}" FontWeight="Bold" Margin="5"/>
+                        <TextBlock Text="{Binding Lead_Status}" FontWeight="Bold" Margin="5"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-        </StackPanel>
-        <Button Content="Table View" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Height="40" Click="Button_Click"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="427,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="427,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="427,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="422,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="325" Height="49"/>
+        <Button x:Name="files" Content="Lead's Files" HorizontalAlignment="Left" Margin="701,389,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="dateAddedBox" HorizontalAlignment="Left" Margin="427,257,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <ComboBox x:Name="sourceBox" HorizontalAlignment="Left" Margin="627,95,0,0" VerticalAlignment="Top" Width="120" Height="24">
+            <ComboBoxItem Content=""/>
+            <ComboBoxItem Content="Facebook"/>
+            <ComboBoxItem Content="Instagram"/>
+            <ComboBoxItem Content="Twitter"/>
+            <ComboBoxItem Content="Referral"/>
+            <ComboBoxItem Content="Physical ads"/>
+        </ComboBox>
+        <ComboBox x:Name="statusBox" HorizontalAlignment="Left" Margin="627,152,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content=""/>
+            <ComboBoxItem Content="Cold"/>
+            <ComboBoxItem Content="Warm"/>
+            <ComboBoxItem Content="Hot"/>
+            <ComboBoxItem Content="Dead"/>
+        </ComboBox>
+        <TextBox x:Name="documentsBox" HorizontalAlignment="Left" Margin="627,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="interviewDateBox" HorizontalAlignment="Left" Margin="627,257,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="409,13,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Bold"/>
+        <TextBlock x:Name="displayID" HorizontalAlignment="Left" Margin="457,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="471,71,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="472,131,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="468,181,0,0" TextWrapping="Wrap" Text="Number" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="458,236,0,0" TextWrapping="Wrap" Text="Date Added" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="662,74,0,0" TextWrapping="Wrap" Text="Source" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="671,131,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="649,182,0,0" TextWrapping="Wrap" Text="Documents ID" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="648,239,0,0" TextWrapping="Wrap" Text="Interview Date" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="569,292,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top"/>
+        <Button x:Name="save" Content="Save Changes" HorizontalAlignment="Left" Margin="609,389,0,0" VerticalAlignment="Top" Click="save_Click"/>
+        <Button x:Name="addLead" Content="Add the new Lead" HorizontalAlignment="Left" Margin="468,389,0,0" VerticalAlignment="Top" Click="addLead_Click"/>
+        <Button x:Name="clear" Content="Clear" HorizontalAlignment="Left" Margin="422,389,0,0" VerticalAlignment="Top" Click="clear_Click"/>
+        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="76,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="19"/>
+        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="210,129,0,0" VerticalAlignment="Top" Width="96" SelectionChanged="FilterChanged" Height="19">
+            <ComboBoxItem Content=""/>
+            <ComboBoxItem Content="Facebook"/>
+            <ComboBoxItem Content="Instagram"/>
+            <ComboBoxItem Content="Twitter"/>
+            <ComboBoxItem Content="Referral"/>
+            <ComboBoxItem Content="Physical ads"/>
+        </ComboBox>
+        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="320,129,0,0" VerticalAlignment="Top" Width="63" SelectionChanged="FilterChanged" Height="19">
+            <ComboBoxItem Content=""/>
+            <ComboBoxItem Content="Cold"/>
+            <ComboBoxItem Content="Warm"/>
+            <ComboBoxItem Content="Hot"/>
+            <ComboBoxItem Content="Dead"/>
+        </ComboBox>
+        <Image HorizontalAlignment="Left" Height="100" Margin="196,197,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image Margin="78,132,704,289" Source="/th.jpg" Stretch="Fill"/>
     </Grid>
 </Window>
