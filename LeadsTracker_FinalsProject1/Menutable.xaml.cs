@@ -178,14 +178,30 @@ namespace LeadsTracker_FinalsProject1
             var newLead = DataGridXAML.Items.Cast<Lead>().FirstOrDefault(l => string.IsNullOrEmpty(l.Lead_ID));
             if (newLead != null)
             {
+                // Check if the Lead_Source is valid
+                List<string> validSources = new List<string> { "Facebook", "Instagram", "Twitter", "Physical ads", "Referral" };
+                if (!validSources.Contains(newLead.Lead_Source, StringComparer.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("Invalid lead source. Choose from: Facebook, Instagram, Twitter, Physical ads, and Referral");
+                    return; // Exit the method without saving
+                }
+
+                // Check if the Lead_Status is valid
+                List<string> validStatuses = new List<string> { "Cold", "Warm", "Hot", "Dead" };
+                if (!validStatuses.Contains(newLead.Lead_Status, StringComparer.OrdinalIgnoreCase))
+                {
+                    MessageBox.Show("Invalid lead status. Choose from: Cold, Warm, Hot, and Dead");
+                    return; // Exit the method without saving
+                }
+
                 string message = $"Do you want to save the following new lead?\n\n" +
-                                 $"Lead Name: {newLead.Lead_Name}\n" +
-                                 $"Lead Email: {newLead.Lead_Email}\n" +
-                                 $"Phone Number: {newLead.Phone_Number}\n" +
-                                 $"Lead Source: {newLead.Lead_Source}\n" +
-                                 $"Notes: {newLead.Notes}\n" +
-                                 $"Lead Status: {newLead.Lead_Status}\n" +
-                                 $"Interview Date: {newLead.Interview_Date}";
+                             $"Lead Name: {newLead.Lead_Name}\n" +
+                             $"Lead Email: {newLead.Lead_Email}\n" +
+                             $"Phone Number: {newLead.Phone_Number}\n" +
+                             $"Lead Source: {newLead.Lead_Source}\n" +
+                             $"Notes: {newLead.Notes}\n" +
+                             $"Lead Status: {newLead.Lead_Status}\n" +
+                             $"Interview Date: {newLead.Interview_Date}";
 
                 MessageBoxResult result = MessageBox.Show(message, "Confirm Save", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -200,6 +216,8 @@ namespace LeadsTracker_FinalsProject1
                 MessageBox.Show("Please enter details for a new lead in the blank row.", "No New Lead", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
+
 
         private void SaveNewLead(Lead newLead)
         {
