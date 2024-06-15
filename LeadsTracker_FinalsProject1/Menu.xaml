@@ -44,12 +44,12 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="427,93,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="427,149,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="427,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="422,313,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="325" Height="49"/>
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="427,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="427,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="427,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="422,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="325" Height="49"/>
         <Button x:Name="files" Content="Lead's Files" HorizontalAlignment="Left" Margin="701,389,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="dateAddedBox" HorizontalAlignment="Left" Margin="427,257,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="dateAddedBox" HorizontalAlignment="Left" Margin="427,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <ComboBox x:Name="sourceBox" HorizontalAlignment="Left" Margin="627,95,0,0" VerticalAlignment="Top" Width="120" Height="24">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Facebook"/>
@@ -65,8 +65,8 @@
             <ComboBoxItem Content="Hot"/>
             <ComboBoxItem Content="Dead"/>
         </ComboBox>
-        <TextBox x:Name="documentsBox" HorizontalAlignment="Left" Margin="627,202,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-        <TextBox x:Name="interviewDateBox" HorizontalAlignment="Left" Margin="627,257,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="documentsBox" HorizontalAlignment="Left" Margin="627,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+        <TextBox x:Name="interviewDateBox" HorizontalAlignment="Left" Margin="627,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <Label Content="ID:" HorizontalAlignment="Left" Margin="409,13,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Bold"/>
         <TextBlock x:Name="displayID" HorizontalAlignment="Left" Margin="457,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="471,71,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>

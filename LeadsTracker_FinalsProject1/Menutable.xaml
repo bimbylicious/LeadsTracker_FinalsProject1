@@ -18,7 +18,7 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Lead ID" Binding="{Binding Lead_ID}"/>
+                <DataGridTextColumn Header="Lead ID" Width="100" Binding="{Binding Lead_ID}"/>
                 <DataGridTextColumn Header="Date" Width="100" Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Lead Source" Width="130" Binding="{Binding Lead_Source}"/>
                 <DataGridTextColumn Header="Lead Name" Width="220" Binding="{Binding Lead_Name}"/>
@@ -30,6 +30,7 @@
                 <DataGridTextColumn Header="Interview Date" Width="136" Binding="{Binding Interview_Date}"/>
             </DataGrid.Columns>
         </DataGrid>
+
         <TextBox x:Name="search" HorizontalAlignment="Left" Margin="168,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="22"/>
         <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="1378,568,0,0" VerticalAlignment="Top" Width="77" Height="24" Click="saveButton_Click"/>
         <Button x:Name="remove" Content="Remove lead" HorizontalAlignment="Left" Margin="22,568,0,0" VerticalAlignment="Top" Width="89" Height="24" Click="removeButton_Click"/>

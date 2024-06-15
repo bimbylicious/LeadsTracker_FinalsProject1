@@ -13,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Windows.Controls.Primitives;
 
 namespace LeadsTracker_FinalsProject1
 {
@@ -33,7 +35,6 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                // Define your connection string (update it with your actual database connection string)
                 string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
                 // Define your query
@@ -175,33 +176,30 @@ namespace LeadsTracker_FinalsProject1
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            var newLead = DataGridXAML.Items.Cast<Lead>().FirstOrDefault(l => string.IsNullOrEmpty(l.Lead_ID));
+            // Filter out non-Lead items and check for new lead entry
+            var newLead = DataGridXAML.Items
+                .OfType<Lead>()  // Filter only items that are of type Lead
+                .FirstOrDefault(l => string.IsNullOrEmpty(l.Lead_ID));
+
+            Lead selectedLead = DataGridXAML.SelectedItem as Lead;
+
             if (newLead != null)
             {
-                // Check if the Lead_Source is valid
-                List<string> validSources = new List<string> { "Facebook", "Instagram", "Twitter", "Physical ads", "Referral" };
-                if (!validSources.Contains(newLead.Lead_Source, StringComparer.OrdinalIgnoreCase))
+                // Validate the new lead
+                if (!IsValidLead(newLead))
                 {
-                    MessageBox.Show("Invalid lead source. Choose from: Facebook, Instagram, Twitter, Physical ads, and Referral");
-                    return; // Exit the method without saving
+                    return; // Validation failed, exit without saving
                 }
 
-                // Check if the Lead_Status is valid
-                List<string> validStatuses = new List<string> { "Cold", "Warm", "Hot", "Dead" };
-                if (!validStatuses.Contains(newLead.Lead_Status, StringComparer.OrdinalIgnoreCase))
-                {
-                    MessageBox.Show("Invalid lead status. Choose from: Cold, Warm, Hot, and Dead");
-                    return; // Exit the method without saving
-                }
-
+                // Confirmation message for saving a new lead
                 string message = $"Do you want to save the following new lead?\n\n" +
-                             $"Lead Name: {newLead.Lead_Name}\n" +
-                             $"Lead Email: {newLead.Lead_Email}\n" +
-                             $"Phone Number: {newLead.Phone_Number}\n" +
-                             $"Lead Source: {newLead.Lead_Source}\n" +
-                             $"Notes: {newLead.Notes}\n" +
-                             $"Lead Status: {newLead.Lead_Status}\n" +
-                             $"Interview Date: {newLead.Interview_Date}";
+                                 $"Lead Name: {newLead.Lead_Name}\n" +
+                                 $"Lead Email: {newLead.Lead_Email}\n" +
+                                 $"Phone Number: {newLead.Phone_Number}\n" +
+                                 $"Lead Source: {newLead.Lead_Source}\n" +
+                                 $"Notes: {newLead.Notes}\n" +
+                                 $"Lead Status: {newLead.Lead_Status}\n" +
+                                 $"Interview Date: {newLead.Interview_Date}";
 
                 MessageBoxResult result = MessageBox.Show(message, "Confirm Save", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
@@ -211,12 +209,111 @@ namespace LeadsTracker_FinalsProject1
                     LoadData(); // Refresh the DataGrid
                 }
             }
+            else if (selectedLead != null)
+            {
+                // Validate the existing lead
+                if (!IsValidLead(selectedLead))
+                {
+                    return; // Validation failed, exit without saving
+                }
+
+                // Confirmation message for updating an existing lead
+                string message = $"Do you want to save changes for the following lead?\n\n" +
+                                 $"Lead ID: {selectedLead.Lead_ID}\n" +
+                                 $"Lead Name: {selectedLead.Lead_Name}\n" +
+                                 $"Lead Email: {selectedLead.Lead_Email}\n" +
+                                 $"Phone Number: {selectedLead.Phone_Number}\n" +
+                                 $"Lead Source: {selectedLead.Lead_Source}\n" +
+                                 $"Notes: {selectedLead.Notes}\n" +
+                                 $"Lead Status: {selectedLead.Lead_Status}\n" +
+                                 $"Interview Date: {selectedLead.Interview_Date}";
+
+                MessageBoxResult result = MessageBox.Show(message, "Confirm Update", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    UpdateLead(selectedLead);
+                    LoadData(); // Refresh the DataGrid
+                }
+            }
             else
             {
-                MessageBox.Show("Please enter details for a new lead in the blank row.", "No New Lead", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a lead to update or enter details for a new lead in the blank row.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
+        private bool IsValidLead(Lead lead)
+        {
+            // Check Lead_Name
+            if (string.IsNullOrEmpty(lead.Lead_Name))
+            {
+                MessageBox.Show("Please enter the lead's name.", "Missing Lead Name", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            // Check Lead_Source
+            List<string> validSources = new List<string> { "Facebook", "Instagram", "Twitter", "Physical ads", "Referral" };
+            if (!validSources.Contains(lead.Lead_Source, StringComparer.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Invalid lead source. Choose from: Facebook, Instagram, Twitter, Physical ads, and Referral", "Invalid Lead Source", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            // Check Lead_Status
+            List<string> validStatuses = new List<string> { "Cold", "Warm", "Hot", "Dead" };
+            if (!validStatuses.Contains(lead.Lead_Status, StringComparer.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Invalid lead status. Choose from: Cold, Warm, Hot, and Dead", "Invalid Lead Status", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            // Check at least one of Email or Phone Number
+            if (string.IsNullOrEmpty(lead.Lead_Email) && string.IsNullOrEmpty(lead.Phone_Number))
+            {
+                MessageBoxResult noContactResult = MessageBox.Show("Do you want to save the lead without email nor phone number?", "Missing Contact Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (noContactResult != MessageBoxResult.Yes)
+                {
+                    return false; // User opted not to save without contact info
+                }
+            }
+
+            return true; // Lead is valid
+        }
+
+        private void UpdateLead(Lead lead)
+        {
+            try
+            {
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string query = "UPDATE Leads SET Lead_Name = @Lead_Name, Lead_Email = @Lead_Email, " +
+                               "Phone_Number = @Phone_Number, Lead_Source = @Lead_Source, " +
+                               "Notes = @Notes, Lead_Status = @Lead_Status, Interview_Date = @Interview_Date " +
+                               "WHERE Lead_ID = @Lead_ID;";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Lead_ID", lead.Lead_ID);
+                    command.Parameters.AddWithValue("@Lead_Name", lead.Lead_Name ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Lead_Email", lead.Lead_Email ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Phone_Number", lead.Phone_Number ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Lead_Source", lead.Lead_Source ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Notes", lead.Notes ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Lead_Status", lead.Lead_Status ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Interview_Date", lead.Interview_Date ?? (object)DBNull.Value);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Lead updated successfully.", "Lead Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
 
         private void SaveNewLead(Lead newLead)
@@ -266,12 +363,14 @@ namespace LeadsTracker_FinalsProject1
 
                     commandInsertDocument.ExecuteNonQuery();
                 }
+
+                MessageBox.Show("New lead saved successfully.", "Lead Saved", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message);
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+        }     
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

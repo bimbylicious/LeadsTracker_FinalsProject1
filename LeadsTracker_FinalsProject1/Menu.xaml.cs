@@ -212,6 +212,13 @@ namespace LeadsTracker_FinalsProject1
         {
             if (SelectedLead != null)
             {
+                // Check if Lead_ID is null or empty
+                if (string.IsNullOrEmpty(SelectedLead.Lead_ID))
+                {
+                    MessageBox.Show("This is not an existing lead, how can you possibly save changes to it?", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 // Update the selected lead with the current TextBox values
                 SelectedLead.Lead_Name = nameBox.Text;
                 SelectedLead.Lead_Status = statusBox.Text;
@@ -223,8 +230,12 @@ namespace LeadsTracker_FinalsProject1
                 SelectedLead.Documents_ID = documentsBox.Text;
                 SelectedLead.Interview_Date = interviewDateBox.Text;
 
-                // Optionally, save changes back to the database if needed
+                // Save changes back to the database
                 SaveChangesToDatabase(SelectedLead);
+            }
+            else
+            {
+                MessageBox.Show("No lead is selected to save changes.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -238,15 +249,15 @@ namespace LeadsTracker_FinalsProject1
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@LeadName", leadToUpdate.Lead_Name);
-                    command.Parameters.AddWithValue("@LeadStatus", leadToUpdate.Lead_Status);
-                    command.Parameters.AddWithValue("@LeadEmail", leadToUpdate.Lead_Email);
-                    command.Parameters.AddWithValue("@LeadSource", leadToUpdate.Lead_Source);
-                    command.Parameters.AddWithValue("@PhoneNumber", leadToUpdate.Phone_Number);
-                    command.Parameters.AddWithValue("@Notes", leadToUpdate.Notes);
-                    command.Parameters.AddWithValue("@Date", leadToUpdate.Date);
-                    command.Parameters.AddWithValue("@DocumentsID", leadToUpdate.Documents_ID);
-                    command.Parameters.AddWithValue("@InterviewDate", leadToUpdate.Interview_Date);
+                    command.Parameters.AddWithValue("@LeadName", leadToUpdate.Lead_Name ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@LeadStatus", leadToUpdate.Lead_Status ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@LeadEmail", leadToUpdate.Lead_Email ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@LeadSource", leadToUpdate.Lead_Source ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@PhoneNumber", leadToUpdate.Phone_Number ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Notes", leadToUpdate.Notes ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Date", leadToUpdate.Date ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@DocumentsID", leadToUpdate.Documents_ID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@InterviewDate", string.IsNullOrEmpty(leadToUpdate.Interview_Date) ? (object)DBNull.Value : leadToUpdate.Interview_Date);
                     command.Parameters.AddWithValue("@LeadID", leadToUpdate.Lead_ID);
 
                     connection.Open();
@@ -254,17 +265,17 @@ namespace LeadsTracker_FinalsProject1
 
                     if (rowsAffected > 0)
                     {
-                        MessageBox.Show("Lead details updated successfully!");
+                        MessageBox.Show("Changes saved successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        MessageBox.Show("No rows affected. Update failed.");
+                        MessageBox.Show("No rows affected. Please check the lead ID and try again.", "No Changes", MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred while updating lead details: " + ex.Message);
+                MessageBox.Show("An error occurred while saving changes to the database: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -392,6 +403,7 @@ namespace LeadsTracker_FinalsProject1
             }
         }
 
+
         private void addLead_Click(object sender, RoutedEventArgs e)
         {
             // Check if displayID is not empty, indicating an existing lead is displayed
@@ -411,6 +423,36 @@ namespace LeadsTracker_FinalsProject1
                 }
             }
 
+            // Validate Lead_Source and Lead_Status
+            if (string.IsNullOrEmpty(sourceBox.Text))
+            {
+                MessageBox.Show("Please choose a Lead Source.", "Missing Lead Source", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(statusBox.Text))
+            {
+                MessageBox.Show("Please choose a Lead Status.", "Missing Lead Status", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(nameBox.Text))
+            {
+                MessageBox.Show("Please enter the lead's name.", "Missing Lead Name", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            // Check if both email and phone number fields are empty
+            if (string.IsNullOrEmpty(emailBox.Text) && string.IsNullOrEmpty(numberBox.Text))
+            {
+                MessageBoxResult result = MessageBox.Show("You have not entered an email or phone number for this lead. Do you still want to save it?", "Confirm Save Without Contact Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result != MessageBoxResult.Yes)
+                {
+                    return; // User chose not to save the lead without contact information, exit method
+                }
+            }
+
             // Create a new Lead object
             Lead newLead = new Lead
             {
@@ -420,7 +462,7 @@ namespace LeadsTracker_FinalsProject1
                 Phone_Number = numberBox.Text,
                 Lead_Source = sourceBox.Text,
                 Notes = notesBox.Text,
-                Date = DateTime.Now.ToString(), // Set to current date
+                Date = DateTime.Now.ToString(), // Set to current date as DateTime
                 Documents_ID = string.Empty, // You may set this as needed
                 Interview_Date = interviewDateBox.Text // You may set this as needed
             };
@@ -428,6 +470,8 @@ namespace LeadsTracker_FinalsProject1
             // Save the new lead to the database
             SaveNewLead(newLead);
         }
+
+
 
         private void SaveNewLead(Lead newLead)
         {
@@ -458,7 +502,7 @@ namespace LeadsTracker_FinalsProject1
                     commandInsert.Parameters.AddWithValue("@Lead_Source", newLead.Lead_Source ?? (object)DBNull.Value);
                     commandInsert.Parameters.AddWithValue("@Notes", newLead.Notes ?? (object)DBNull.Value);
                     commandInsert.Parameters.AddWithValue("@Documents_ID", nextLeadID.ToString()); // Documents_ID is the same as Lead_ID
-                    commandInsert.Parameters.AddWithValue("@Interview_Date", newLead.Interview_Date ?? (object)DBNull.Value);
+                    commandInsert.Parameters.AddWithValue("@Interview_Date", string.IsNullOrEmpty(newLead.Interview_Date) ? (object)DBNull.Value : newLead.Interview_Date);
 
                     commandInsert.ExecuteNonQuery();
 
@@ -486,6 +530,7 @@ namespace LeadsTracker_FinalsProject1
                 MessageBox.Show("An error occurred while adding a new lead: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
 
         private void clear_Click(object sender, RoutedEventArgs e)
