@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
-        Title="Menutable" Height="650" Width="1500" WindowStartupLocation="CenterScreen">
+        Title="Menutable" Height="650" Width="1500" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         <Button x:Name ="view" Content="Change view" HorizontalAlignment="Left" Margin="1419,10,0,0" VerticalAlignment="Top" Click="viewButton_Click"/>
         <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False">

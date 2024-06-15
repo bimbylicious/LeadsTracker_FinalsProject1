@@ -5,31 +5,121 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
-        Title="Documents" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FFE698FC">
-        <TextBlock Text="Picture" HorizontalAlignment="Left" Margin="107,63,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Image x:Name="Picture" HorizontalAlignment="Left" Height="100" Margin="79,84,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
-        <TextBlock Text="Birth Certificate" HorizontalAlignment="Left" Margin="336,63,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Image x:Name="Birth_Certificate" HorizontalAlignment="Left" Height="100" Margin="331,84,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
-        <TextBlock Text="Good Moral" HorizontalAlignment="Left" Margin="626,63,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Image x:Name="Good_Moral" HorizontalAlignment="Left" Height="100" Margin="608,84,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
-        <TextBlock Text="TOR" HorizontalAlignment="Left" Margin="115,245,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.187" FontWeight="Bold"/>
-        <Image x:Name="TOR" HorizontalAlignment="Left" Height="100" Margin="79,265,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
-        <TextBlock Text="Medical Clearance" HorizontalAlignment="Left" Margin="329,245,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Image x:Name="Medical_Clearance" HorizontalAlignment="Left" Height="100" Margin="331,265,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
-        <TextBlock Text="Report Card" HorizontalAlignment="Left" Margin="626,244,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Image x:Name="Report_Card" HorizontalAlignment="Left" Height="100" Margin="610,265,0,0" VerticalAlignment="Top" Width="100" Source="/NO IMAGE FOUND.png"/>
-        <Button x:Name="Camera_Picture" Content="Camera" HorizontalAlignment="Left" Margin="69,197,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="FileUpload_Picture" Content="File Upload" HorizontalAlignment="Left" Margin="129,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
-        <Button x:Name="Camera_Picture_Copy" Content="Camera" HorizontalAlignment="Left" Margin="321,197,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="FileUpload_Picture_Copy" Content="File Upload" HorizontalAlignment="Left" Margin="381,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
-        <Button x:Name="Camera_Picture_Copy1" Content="Camera" HorizontalAlignment="Left" Margin="600,197,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="FileUpload_Picture_Copy1" Content="File Upload" HorizontalAlignment="Left" Margin="660,197,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
-        <Button x:Name="Camera_Picture_Copy2" Content="Camera" HorizontalAlignment="Left" Margin="69,379,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="FileUpload_Picture_Copy2" Content="File Upload" HorizontalAlignment="Left" Margin="129,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
-        <Button x:Name="Camera_Picture_Copy3" Content="Camera" HorizontalAlignment="Left" Margin="321,379,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="FileUpload_Picture_Copy3" Content="File Upload" HorizontalAlignment="Left" Margin="381,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
-        <Button x:Name="Camera_Picture_Copy4" Content="Camera" HorizontalAlignment="Left" Margin="600,379,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="FileUpload_Picture_Copy4" Content="File Upload" HorizontalAlignment="Left" Margin="660,379,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.948"/>
+        Title="Documents" Height="497" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid Background="#FF4E2A6D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="84*"/>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="17*"/>
+            <RowDefinition Height="24*"/>
+            <RowDefinition Height="115*"/>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="63*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Picture" HorizontalAlignment="Left" Margin="107,63,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="16" Width="40"/>
+        <Image x:Name="Picture" HorizontalAlignment="Left" Height="100" Margin="79,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="1"/>
+        <Button x:Name="Camera_LeadPicture" Content="Camera" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Camera_Click" Tag="LeadPicture">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Upload_LeadPicture" Content="Upload" HorizontalAlignment="Left" Margin="140,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Upload_Click" Tag="LeadPicture">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="Birth Certificate" HorizontalAlignment="Left" Margin="336,63,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="16" Width="90"/>
+        <Image x:Name="Birth_Certificate" HorizontalAlignment="Left" Height="100" Margin="331,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="1"/>
+        <Button x:Name="Camera_BirthCert" Content="Camera" HorizontalAlignment="Left" Margin="301,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Camera_Click" Tag="BirthCert">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Upload_BirthCert" Content="Upload" HorizontalAlignment="Left" Margin="391,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Upload_Click" Tag="BirthCert">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="Good Moral" HorizontalAlignment="Left" Margin="626,63,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="16" Width="67"/>
+        <Image x:Name="Good_Moral" HorizontalAlignment="Left" Height="100" Margin="608,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="1"/>
+        <Button x:Name="Camera_GoodMoral" Content="Camera" HorizontalAlignment="Left" Margin="577,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Camera_Click" Tag="GoodMoral">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Upload_GoodMoral" Content="Upload" HorizontalAlignment="Left" Margin="667,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Upload_Click" Tag="GoodMoral">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="TOR" HorizontalAlignment="Left" Margin="115,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.187" FontWeight="Bold" Foreground="White" Grid.Row="4" Height="16" Width="24"/>
+        <Image x:Name="TOR" HorizontalAlignment="Left" Height="100" Margin="79,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="5"/>
+        <Button x:Name="Camera_TOR" Content="Camera" HorizontalAlignment="Left" Margin="50,1,0,0" VerticalAlignment="Top" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="6" Click="Camera_Click" Tag="TOR">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Upload_TOR" Content="Upload" HorizontalAlignment="Left" Margin="140,1,0,0" VerticalAlignment="Top" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="6" Click="Upload_Click" Tag="TOR">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="Medical Clearance" HorizontalAlignment="Left" Margin="329,2,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Grid.Row="4" Height="16" Width="102"/>
+        <Image x:Name="Medical_Clearance" HorizontalAlignment="Left" Height="100" Margin="331,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="5"/>
+        <Button x:Name="Camera_MedClear" Content="Camera" HorizontalAlignment="Left" Margin="301,1,0,0" VerticalAlignment="Top" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="6" Click="Camera_Click" Tag="MedClear">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Upload_MedClear" Content="Upload" HorizontalAlignment="Left" Margin="385,1,0,0" VerticalAlignment="Top" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="6" Click="Upload_Click" Tag="MedClear">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="Report Card" HorizontalAlignment="Left" Margin="624,2,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Grid.Row="4" Height="16" Width="68"/>
+        <Image x:Name="Report_Card" HorizontalAlignment="Left" Height="100" Margin="608,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="5"/>
+        <Button x:Name="Camera_RepCard" Content="Camera" HorizontalAlignment="Left" Margin="577,1,0,0" VerticalAlignment="Top" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="6" Click="Camera_Click" Tag="RepCard">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Upload_RepCard" Content="Upload" HorizontalAlignment="Left" Margin="667,1,0,0" VerticalAlignment="Top" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="6" Click="Upload_Click" Tag="RepCard">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock Text="Leads' Document Viewer" TextAlignment="Center" FontSize="28" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="37" Width="344"/>
+        <Button x:Name="SaveBtn" Content="Save Changes" HorizontalAlignment="Left" Margin="332,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="98" Height="23" Grid.Row="7" Click="SaveBtn_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Window>

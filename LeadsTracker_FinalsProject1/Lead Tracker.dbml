@@ -1,5 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Lead Tracker" Class="Lead_TrackerDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-VQRQBKBN\SQLEXPRESS;Initial Catalog=&quot;Lead Tracker&quot;;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False" SettingsObjectName="LeadsTracker_FinalsProject1.Properties.Settings" SettingsPropertyName="Lead_TrackerConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Documents" Member="Documents">
     <Type Name="Document">
       <Column Name="Documents_ID" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />

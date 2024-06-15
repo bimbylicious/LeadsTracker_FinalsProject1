@@ -34,7 +34,7 @@ namespace LeadsTracker_FinalsProject1
             try
             {
                 // Define your connection string (update it with your actual database connection string)
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
 
                 // Define your query
                 string query = "SELECT * FROM Leads;";
@@ -142,7 +142,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
                 string query = "DELETE FROM Leads WHERE Lead_ID = @Lead_ID;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -205,7 +205,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+                string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -285,97 +285,90 @@ namespace LeadsTracker_FinalsProject1
             if (DataGridXAML.SelectedItem is Lead selectedLead)
             {
                 var document = GetDocumentForLead(selectedLead.Documents_ID);
-                if (document != null)
-                {
-                    Documents docu = new Documents(document);
-                    docu.Show();
-                }
-                else
-                {
-                    MessageBox.Show("No documents found for the selected lead.", "No Documents", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                Documents docu = new Documents(document);
+                docu.Show();
             }
             else
             {
                 MessageBox.Show("Please select a lead to view documents.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-        private Document GetDocumentForLead(string documentsId)
-        {
-            Document document = null;
+		private Document GetDocumentForLead(string documentsId)
+		{
+			Document document = null;
 
-            try
-            {
-                string connectionString = "Data Source=CCL01-37;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
-                string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
+			try
+			{
+				string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=Lead Tracker;Integrated Security=True;Connect Timeout=30;Encrypt=True;TrustServerCertificate=True";
+				string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@Documents_ID", documentsId);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
+				using (SqlConnection connection = new SqlConnection(connectionString))
+				{
+					SqlCommand command = new SqlCommand(query, connection);
+					command.Parameters.AddWithValue("@Documents_ID", documentsId);
+					connection.Open();
+					SqlDataReader reader = command.ExecuteReader();
 
-                    if (reader.Read())
-                    {
-                        document = new Document
-                        {
-                            Documents_ID = reader["Documents_ID"].ToString(),
-                            Picture = reader["Picture"].ToString(),
-                            Birth_Certificate = reader["Birth_Certificate"].ToString(),
-                            Good_Moral = reader["Good_Moral"].ToString(),
-                            TOR = reader["TOR"].ToString(),
-                            Medical_Clearance = reader["Medical_Clearance"].ToString(),
-                            Report_Card = reader["Report_Card"].ToString()
-                        };
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message);
-            }
+					if (reader.Read())
+					{
+						document = new Document
+						{
+							Documents_ID = reader["Documents_ID"].ToString(),
+							Picture = reader["Picture"] != DBNull.Value ? reader["Picture"].ToString() : null,
+							Birth_Certificate = reader["Birth_Certificate"] != DBNull.Value ? reader["Birth_Certificate"].ToString() : null,
+							Good_Moral = reader["Good_Moral"] != DBNull.Value ? reader["Good_Moral"].ToString() : null,
+							TOR = reader["TOR"] != DBNull.Value ? reader["TOR"].ToString() : null,
+							Medical_Clearance = reader["Medical_Clearance"] != DBNull.Value ? reader["Medical_Clearance"].ToString() : null,
+							Report_Card = reader["Report_Card"] != DBNull.Value ? reader["Report_Card"].ToString() : null
+						};
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("An error occurred: " + ex.Message);
+			}
 
-            return document;
-        }
+			return document;
+		}
 
-        //private void search_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    // Clear search box text when it receives focus
-        //    search.GotFocus += (s, ev) => { search.Text = ""; };
+		//private void search_TextChanged(object sender, TextChangedEventArgs e)
+		//{
+		//    // Clear search box text when it receives focus
+		//    search.GotFocus += (s, ev) => { search.Text = ""; };
 
-        //    // Check if originalLeads is null
-        //    if (originalLeads == null)
-        //    {
-        //        return;
-        //    }
+		//    // Check if originalLeads is null
+		//    if (originalLeads == null)
+		//    {
+		//        return;
+		//    }
 
-        //    string searchText = search.Text.Trim().ToLower();
-        //    List<Lead> filteredLeads;
+		//    string searchText = search.Text.Trim().ToLower();
+		//    List<Lead> filteredLeads;
 
-        //    if (string.IsNullOrEmpty(searchText))
-        //    {
-        //        // If search box is empty, restore original data
-        //        filteredLeads = originalLeads;
-        //    }
-        //    else
-        //    {
-        //        // Filter data based on search text
-        //        filteredLeads = originalLeads
-        //            .Where(lead =>
-        //                lead.Lead_ID.ToLower().Contains(searchText) ||
-        //                lead.Lead_Name.ToLower().Contains(searchText) ||
-        //                lead.Lead_Email.ToLower().Contains(searchText) ||
-        //                lead.Phone_Number.ToLower().Contains(searchText) ||
-        //                lead.Lead_Source.ToLower().Contains(searchText) ||
-        //                lead.Notes.ToLower().Contains(searchText) ||
-        //                lead.Lead_Status.ToLower().Contains(searchText))
-        //            .ToList();
-        //    }
+		//    if (string.IsNullOrEmpty(searchText))
+		//    {
+		//        // If search box is empty, restore original data
+		//        filteredLeads = originalLeads;
+		//    }
+		//    else
+		//    {
+		//        // Filter data based on search text
+		//        filteredLeads = originalLeads
+		//            .Where(lead =>
+		//                lead.Lead_ID.ToLower().Contains(searchText) ||
+		//                lead.Lead_Name.ToLower().Contains(searchText) ||
+		//                lead.Lead_Email.ToLower().Contains(searchText) ||
+		//                lead.Phone_Number.ToLower().Contains(searchText) ||
+		//                lead.Lead_Source.ToLower().Contains(searchText) ||
+		//                lead.Notes.ToLower().Contains(searchText) ||
+		//                lead.Lead_Status.ToLower().Contains(searchText))
+		//            .ToList();
+		//    }
 
-        //    // Update DataGrid with filtered data
-        //    DataGridXAML.ItemsSource = null; // Clear the existing items source
-        //    DataGridXAML.ItemsSource = filteredLeads; // Set the new items source
-        //}
-    }
+		//    // Update DataGrid with filtered data
+		//    DataGridXAML.ItemsSource = null; // Clear the existing items source
+		//    DataGridXAML.ItemsSource = filteredLeads; // Set the new items source
+		//}
+	}
 }

@@ -32,12 +32,6 @@ namespace LeadsTracker_FinalsProject1
     partial void OnCreated();
     #endregion
 		
-		public Lead_TrackerDataContext() : 
-				base(global::LeadsTracker_FinalsProject1.Properties.Settings.Default.Lead_TrackerConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
-		
 		public Lead_TrackerDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
