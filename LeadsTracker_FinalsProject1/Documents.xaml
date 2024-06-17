@@ -113,7 +113,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Text="Leads' Document Viewer" TextAlignment="Center" FontSize="28" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="37" Width="344"/>
+        <TextBlock Text="Leads Document Viewer" TextAlignment="Center" FontSize="28" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="37" Width="344"/>
         <Button x:Name="SaveBtn" Content="Save Changes" HorizontalAlignment="Left" Margin="332,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="98" Height="23" Grid.Row="7" Click="SaveBtn_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">

@@ -6,19 +6,38 @@
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
         Title="Menu" Height="450" Width="800">
-    <Grid Height="434" VerticalAlignment="Bottom">
+    <Window.Resources>
+        <Color x:Key="GradientStopColor1">#FFC2B2D9</Color>
+        <Color x:Key="GradientStopColor2">White</Color>
+        <Color x:Key="GradientStopColor3">#FFC2B2D9</Color>
+    </Window.Resources>
+    <Grid Height="434" VerticalAlignment="Bottom" Background="#FF8B75B2">
 
-        <Button x:Name ="signoutButton" Content="Sign Out" HorizontalAlignment="Left" Click="signoutButton_Click" Margin="10,20,0,394"/>
-        <Button x:Name ="viewButton" Content="Change view" HorizontalAlignment="Right" Click="viewButton_Click" Margin="0,20,10,394"/>
-        <TextBlock Text="Leads Summary" FontWeight="Bold" FontSize="16" Margin="10,40,654,363" RenderTransformOrigin="0.493,0.71"/>
+        <Button x:Name ="signoutButton" Content="Sign Out" HorizontalAlignment="Left" Click="signoutButton_Click" Margin="10,404,0,10">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="{DynamicResource GradientStopColor1}" Offset="1"/>
+                    <GradientStop Color="White" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name ="View_Menu" Content="View Table" HorizontalAlignment="Right" Click="viewButton_Click" Margin="0,20,10,394" FontFamily="Liberation Sans" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="{DynamicResource GradientStopColor2}"/>
+                    <GradientStop Color="#FFC2B2D9" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBlock Text="Leads Summary" FontSize="24" Margin="10,25,564,379" RenderTransformOrigin="0.493,0.71" FontFamily="Tahoma" FontWeight="Bold"/>
 
-        <TextBlock Text="Total Leads" FontWeight="Bold" Margin="10,79,710,332"/>
-        <TextBlock x:Name="totalCounter" Text="100" FontSize="24" Foreground="Blue" Margin="10,95,720,313"/>
+        <TextBlock Text="Total Leads" FontWeight="Bold" Margin="12,65,708,346" Foreground="#FFA7ABFF"/>
+        <TextBlock x:Name="totalCounter" Text="100" FontSize="24" Foreground="Blue" Margin="12,81,718,327"/>
 
-        <TextBlock Text="New Leads" FontWeight="Bold" Margin="90,80,635,330"/>
-        <TextBlock x:Name="newCounter" Text="25" FontSize="24" Foreground="Green" Margin="90,93,664,304"/>
+        <TextBlock Text="New Leads" FontWeight="Bold" Margin="92,66,634,344" Foreground="#FFBCFF77"/>
+        <TextBlock x:Name="newCounter" Text="25" FontSize="24" Foreground="Green" Margin="92,79,662,318"/>
 
-        <TextBlock Text="Dead Leads" FontWeight="Bold" Margin="170,81,551,331" RenderTransformOrigin="0.5,0.5">
+        <TextBlock Text="Dead Leads" FontWeight="Bold" Margin="172,67,549,345" RenderTransformOrigin="0.5,0.5" Foreground="#FFF49191">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -28,11 +47,11 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBlock x:Name="closedCounter" Text="50" FontSize="24" Foreground="Red" Margin="170,93,584,312"/>
+        <TextBlock x:Name="closedCounter" Text="50" FontSize="24" Foreground="Red" Margin="172,79,582,326"/>
 
-        <TextBlock Text="Leads" FontWeight="Bold" FontSize="16" Margin="10,126,746,287"/>
+        <TextBlock Text="Leads" FontWeight="Bold" FontSize="16" Margin="13,118,743,295" Foreground="Black"/>
 
-        <ListBox x:Name="leadList" ItemsSource="{Binding Leads}" SelectedItem="{Binding SelectedLead}" Margin="10,174,417,10" Width="Auto">
+        <ListBox x:Name="leadList" ItemsSource="{Binding Leads}" SelectedItem="{Binding SelectedLead}" Margin="8,148,419,36" Width="Auto">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -47,8 +66,15 @@
         <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="427,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="427,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="427,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="422,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="325" Height="49"/>
-        <Button x:Name="files" Content="Lead's Files" HorizontalAlignment="Left" Margin="701,389,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="422,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" Height="49"/>
+        <Button x:Name="files" Content="View Files" HorizontalAlignment="Left" Margin="697,389,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="70">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
         <TextBox x:Name="dateAddedBox" HorizontalAlignment="Left" Margin="427,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <ComboBox x:Name="sourceBox" HorizontalAlignment="Left" Margin="627,95,0,0" VerticalAlignment="Top" Width="120" Height="24">
             <ComboBoxItem Content=""/>
@@ -67,22 +93,45 @@
         </ComboBox>
         <TextBox x:Name="documentsBox" HorizontalAlignment="Left" Margin="627,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <TextBox x:Name="interviewDateBox" HorizontalAlignment="Left" Margin="627,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="409,13,0,0" VerticalAlignment="Top" FontSize="25" FontWeight="Bold"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="427,25,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Tahoma"/>
         <TextBlock x:Name="displayID" HorizontalAlignment="Left" Margin="457,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="471,71,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="472,131,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="468,181,0,0" TextWrapping="Wrap" Text="Number" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="458,236,0,0" TextWrapping="Wrap" Text="Date Added" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="662,74,0,0" TextWrapping="Wrap" Text="Source" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="671,131,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="649,182,0,0" TextWrapping="Wrap" Text="Documents ID" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="648,239,0,0" TextWrapping="Wrap" Text="Interview Date" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="569,292,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top"/>
-        <Button x:Name="save" Content="Save Changes" HorizontalAlignment="Left" Margin="609,389,0,0" VerticalAlignment="Top" Click="save_Click"/>
-        <Button x:Name="addLead" Content="Add the new Lead" HorizontalAlignment="Left" Margin="468,389,0,0" VerticalAlignment="Top" Click="addLead_Click"/>
-        <Button x:Name="clear" Content="Clear" HorizontalAlignment="Left" Margin="422,389,0,0" VerticalAlignment="Top" Click="clear_Click"/>
-        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="76,128,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="19"/>
-        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="210,129,0,0" VerticalAlignment="Top" Width="96" SelectionChanged="FilterChanged" Height="19">
+        <TextBlock HorizontalAlignment="Left" Margin="471,71,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="472,131,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="468,181,0,0" TextWrapping="Wrap" Text="Number" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="458,236,0,0" TextWrapping="Wrap" Text="Date Added" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="671,74,0,0" TextWrapping="Wrap" Text="Source" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="671,131,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="649,182,0,0" TextWrapping="Wrap" Text="Documents ID" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="648,239,0,0" TextWrapping="Wrap" Text="Interview Date" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="569,292,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="save" Content="Save Changes" HorizontalAlignment="Left" Margin="583,389,0,0" VerticalAlignment="Top" Click="save_Click" RenderTransformOrigin="0.318,0.461" FontWeight="Bold" BorderBrush="Black" Width="103">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor3}" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="addLead" Content="Add Lead" HorizontalAlignment="Left" Margin="482,389,0,0" VerticalAlignment="Top" Click="addLead_Click" Width="89" BorderBrush="Black" FontWeight="Bold" RenderTransformOrigin="0.467,0.401">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="{DynamicResource GradientStopColor3}" Offset="1"/>
+                    <GradientStop Color="#FFF8F8F8" Offset="0"/>
+                    <GradientStop Color="#FFC2B2D9" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="clear" Content="Clear" HorizontalAlignment="Left" Margin="422,389,0,0" VerticalAlignment="Top" Click="clear_Click" Width="46" BorderBrush="#FF060606" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC2B2D9" Offset="1"/>
+                    <GradientStop Color="#FFBC937C" Offset="0"/>
+                    <GradientStop Color="White" Offset="0"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="74,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="19"/>
+        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="208,121,0,0" VerticalAlignment="Top" Width="96" SelectionChanged="FilterChanged" Height="19">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Facebook"/>
             <ComboBoxItem Content="Instagram"/>
@@ -90,14 +139,14 @@
             <ComboBoxItem Content="Referral"/>
             <ComboBoxItem Content="Physical ads"/>
         </ComboBox>
-        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="320,129,0,0" VerticalAlignment="Top" Width="63" SelectionChanged="FilterChanged" Height="19">
+        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="318,121,0,0" VerticalAlignment="Top" Width="63" SelectionChanged="FilterChanged" Height="19">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Cold"/>
             <ComboBoxItem Content="Warm"/>
             <ComboBoxItem Content="Hot"/>
             <ComboBoxItem Content="Dead"/>
         </ComboBox>
-        <Image HorizontalAlignment="Left" Height="100" Margin="196,197,0,0" VerticalAlignment="Top" Width="100"/>
-        <Image Margin="78,132,704,289" Source="/th.jpg" Stretch="Fill"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="194,198,0,0" VerticalAlignment="Top" Width="100"/>
+        <Image Margin="76,124,706,297" Source="/th.jpg" Stretch="Fill"/>
     </Grid>
 </Window>
