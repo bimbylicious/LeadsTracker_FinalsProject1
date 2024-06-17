@@ -6,15 +6,27 @@
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
         Title="Menutable" Height="650" Width="1500" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
-    <Grid>
-        <Button x:Name ="view" Content="Change view" HorizontalAlignment="Left" Margin="1419,10,0,0" VerticalAlignment="Top" Click="viewButton_Click"/>
-        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False">
+    <Grid Background="#FF8B75B2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="713*"/>
+            <ColumnDefinition Width="37*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name ="view" Content="Back" HorizontalAlignment="Left" Margin="1407,28,0,0" VerticalAlignment="Top" Click="viewButton_Click" BorderBrush="Black" Height="20" Width="71" Grid.ColumnSpan="2">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Left" Margin="22,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False" Grid.ColumnSpan="2">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
-                    <Setter Property="Background" Value="DarkTurquoise"/>
+                    <Setter Property="Background" Value="#FF4E2A6D"/>
                     <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Foreground" Value="White"/>
                     <Setter Property="BorderThickness" Value="0,0,1,2"/>
-                    <Setter Property="BorderBrush" Value="Black"/>
+                    <Setter Property="BorderBrush" Value="White"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
@@ -31,11 +43,32 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="168,27,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="22"/>
-        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="1378,568,0,0" VerticalAlignment="Top" Width="77" Height="24" Click="saveButton_Click"/>
-        <Button x:Name="remove" Content="Remove lead" HorizontalAlignment="Left" Margin="22,568,0,0" VerticalAlignment="Top" Width="89" Height="24" Click="removeButton_Click"/>
-        <Button x:Name="LeadDocuments" Content="View Lead Documents" HorizontalAlignment="Center" Margin="0,570,0,0" VerticalAlignment="Top" Click="LeadDocuments_Click"/>
-        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="355,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="FilterChanged">
+        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="22,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="142" TextChanged="search_TextChanged" Height="22"/>
+        <Button x:Name="save" Content="Save" HorizontalAlignment="Left" Margin="1387,563,0,0" VerticalAlignment="Top" Width="76" Height="24" Click="saveButton_Click" Grid.ColumnSpan="2" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0.006"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="remove" Content="Remove " HorizontalAlignment="Left" Margin="34,558,0,0" VerticalAlignment="Top" Width="89" Height="29" Click="removeButton_Click" RenderTransformOrigin="0.683,0.568" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}" Offset="0.995"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="LeadDocuments" Content="View Documents" HorizontalAlignment="Left" Margin="690,560,0,0" VerticalAlignment="Top" Click="LeadDocuments_Click" Height="27" Width="120" RenderTransformOrigin="0.6,0.512" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="254,33,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="FilterChanged" Height="22">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Facebook"/>
             <ComboBoxItem Content="Instagram"/>
@@ -43,17 +76,17 @@
             <ComboBoxItem Content="Referral"/>
             <ComboBoxItem Content="Physical ads"/>
         </ComboBox>
-        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="510,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="FilterChanged">
+        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="458,34,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="FilterChanged" Height="22">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Cold"/>
             <ComboBoxItem Content="Warm"/>
             <ComboBoxItem Content="Hot"/>
             <ComboBoxItem Content="Dead"/>
         </ComboBox>
-        <Label Content="Source" HorizontalAlignment="Left" Margin="392,2,0,0" VerticalAlignment="Top"/>
-        <Label Content="Status" HorizontalAlignment="Left" Margin="549,4,0,0" VerticalAlignment="Top"/>
+        <Label Content="Source" HorizontalAlignment="Left" Margin="203,29,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.132,0.583" Height="26" Width="46"/>
+        <Label Content="Status" HorizontalAlignment="Left" Margin="406,29,0,0" VerticalAlignment="Top" Foreground="White" Height="26" Width="42"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="406,273,0,0" VerticalAlignment="Top" Width="100"/>
-        <Image Margin="168,28,1309,585" Source="/th.jpg" Stretch="Fill"/>
+        <Image Margin="22,33,1380,580" Source="/th.jpg" Stretch="Fill"/>
 
     </Grid>
 </Window>

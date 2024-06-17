@@ -29,15 +29,19 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <TextBlock Text="Leads Summary" FontSize="24" Margin="10,25,564,379" RenderTransformOrigin="0.493,0.71" FontFamily="Tahoma" FontWeight="Bold"/>
+        <TextBlock Text="Leads Summary" FontSize="24" Margin="10,25,564,379" RenderTransformOrigin="0.493,0.71" FontFamily="Tahoma" FontWeight="Bold" Foreground="#FFFBFBFB">
+            <TextBlock.Effect>
+                <DropShadowEffect/>
+            </TextBlock.Effect>
+        </TextBlock>
 
-        <TextBlock Text="Total Leads" FontWeight="Bold" Margin="12,65,708,346" Foreground="#FFA7ABFF"/>
+        <TextBlock Text="Total Leads" FontWeight="Bold" Margin="12,65,708,346" Foreground="Black"/>
         <TextBlock x:Name="totalCounter" Text="100" FontSize="24" Foreground="Blue" Margin="12,81,718,327"/>
 
-        <TextBlock Text="New Leads" FontWeight="Bold" Margin="92,66,634,344" Foreground="#FFBCFF77"/>
+        <TextBlock Text="New Leads" FontWeight="Bold" Margin="92,66,634,344" Foreground="Black"/>
         <TextBlock x:Name="newCounter" Text="25" FontSize="24" Foreground="Green" Margin="92,79,662,318"/>
 
-        <TextBlock Text="Dead Leads" FontWeight="Bold" Margin="172,67,549,345" RenderTransformOrigin="0.5,0.5" Foreground="#FFF49191">
+        <TextBlock Text="Dead Leads" FontWeight="Bold" Margin="172,67,549,345" RenderTransformOrigin="0.5,0.5" Foreground="Black">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -66,7 +70,7 @@
         <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="427,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="427,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="427,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="422,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" Height="49"/>
+        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="427,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" Height="49"/>
         <Button x:Name="files" Content="View Files" HorizontalAlignment="Left" Margin="697,389,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="70">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -93,7 +97,11 @@
         </ComboBox>
         <TextBox x:Name="documentsBox" HorizontalAlignment="Left" Margin="627,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
         <TextBox x:Name="interviewDateBox" HorizontalAlignment="Left" Margin="627,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="ID:" HorizontalAlignment="Left" Margin="427,25,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Tahoma"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="427,25,0,0" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Tahoma" Foreground="White">
+            <Label.Effect>
+                <DropShadowEffect/>
+            </Label.Effect>
+        </Label>
         <TextBlock x:Name="displayID" HorizontalAlignment="Left" Margin="457,21,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="471,71,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Foreground="White"/>
         <TextBlock HorizontalAlignment="Left" Margin="472,131,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="White"/>
@@ -103,7 +111,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="671,131,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White"/>
         <TextBlock HorizontalAlignment="Left" Margin="649,182,0,0" TextWrapping="Wrap" Text="Documents ID" VerticalAlignment="Top" Foreground="White"/>
         <TextBlock HorizontalAlignment="Left" Margin="648,239,0,0" TextWrapping="Wrap" Text="Interview Date" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="569,292,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="579,292,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Foreground="White"/>
         <Button x:Name="save" Content="Save Changes" HorizontalAlignment="Left" Margin="583,389,0,0" VerticalAlignment="Top" Click="save_Click" RenderTransformOrigin="0.318,0.461" FontWeight="Bold" BorderBrush="Black" Width="103">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -125,8 +133,8 @@
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFC2B2D9" Offset="1"/>
-                    <GradientStop Color="#FFBC937C" Offset="0"/>
-                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FFBC937C"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}"/>
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
