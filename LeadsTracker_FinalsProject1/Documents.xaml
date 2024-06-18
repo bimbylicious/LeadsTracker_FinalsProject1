@@ -17,7 +17,6 @@
             <RowDefinition Height="29*"/>
             <RowDefinition Height="63*"/>
         </Grid.RowDefinitions>
-
         <TextBlock Text="Picture" HorizontalAlignment="Left" Margin="107,63,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="16" Width="40"/>
         <Image x:Name="Picture" HorizontalAlignment="Left" Height="100" Margin="79,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="1"/>
         <Button x:Name="Camera_LeadPicture" Content="Camera" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Camera_Click" Tag="LeadPicture" Background="#FF750000">

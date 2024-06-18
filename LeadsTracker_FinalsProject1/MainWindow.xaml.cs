@@ -31,7 +31,7 @@ namespace LeadsTracker_FinalsProject1
             InitializeComponent();
 
             _ltDC = new DataClasses1DataContext(
-                Properties.Settings.Default.Lead_TrackerConnectionString);
+                Properties.Settings.Default.Lead_TrackerConnectionString2);
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
