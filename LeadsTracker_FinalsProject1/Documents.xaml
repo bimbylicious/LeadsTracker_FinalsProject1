@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
         Title="Documents" Height="497" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid Background="#FF4E2A6D">
+    <Grid Background="#FF8B75B2">
         <Grid.RowDefinitions>
             <RowDefinition Height="84*"/>
             <RowDefinition Height="115*"/>
@@ -20,7 +20,7 @@
 
         <TextBlock Text="Picture" HorizontalAlignment="Left" Margin="107,63,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="16" Width="40"/>
         <Image x:Name="Picture" HorizontalAlignment="Left" Height="100" Margin="79,0,0,0" VerticalAlignment="Center" Width="100" Source="/NO IMAGE FOUND.png" Grid.Row="1"/>
-        <Button x:Name="Camera_LeadPicture" Content="Camera" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Camera_Click" Tag="LeadPicture">
+        <Button x:Name="Camera_LeadPicture" Content="Camera" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Foreground="White" BorderBrush="White" Width="73" Height="23" Grid.Row="2" Click="Camera_Click" Tag="LeadPicture" Background="#FF750000">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="6"/>
@@ -114,7 +114,11 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock Text="Leads' Document Viewer" TextAlignment="Center" FontSize="28" HorizontalAlignment="Left" Margin="209,10,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="37" Width="344"/>
+        <TextBlock Text="Leads Document Viewer" TextAlignment="Center" FontSize="28" HorizontalAlignment="Left" Margin="209,13,0,0" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" Height="37" Width="344">
+            <TextBlock.Effect>
+                <DropShadowEffect/>
+            </TextBlock.Effect>
+        </TextBlock>
         <Button x:Name="SaveBtn" Content="Save Changes" HorizontalAlignment="Left" Margin="332,0,0,0" VerticalAlignment="Center" Background="#FF750000" Foreground="White" BorderBrush="White" Width="98" Height="23" Grid.Row="7" Click="SaveBtn_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
