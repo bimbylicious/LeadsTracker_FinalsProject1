@@ -33,7 +33,7 @@ namespace LeadsTracker_FinalsProject1
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::LeadsTracker_FinalsProject1.Properties.Settings.Default.Lead_TrackerConnectionString2, mappingSource)
+				base(global::LeadsTracker_FinalsProject1.Properties.Settings.Default.Lead_TrackerConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

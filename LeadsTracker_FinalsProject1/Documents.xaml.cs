@@ -25,9 +25,12 @@ namespace LeadsTracker_FinalsProject1
 	{
 		private const string FolderName = "UploadedDocuments";
 		private Document document;
+
 		public Documents(Document document)
 		{
 			InitializeComponent();
+			this.document = document ?? new Document { Documents_ID = GetNextDocumentId() };
+
 			if (document != null)
 			{
 				LoadDocumentImages(document);
@@ -36,32 +39,37 @@ namespace LeadsTracker_FinalsProject1
 
 		private void LoadDocumentImages(Document document)
 		{
-			if (document != null)
+			Picture.Source = LoadImageFromPath(document.Picture);
+			Birth_Certificate.Source = LoadImageFromPath(document.Birth_Certificate);
+			Good_Moral.Source = LoadImageFromPath(document.Good_Moral);
+			TOR.Source = LoadImageFromPath(document.TOR);
+			Medical_Clearance.Source = LoadImageFromPath(document.Medical_Clearance);
+			Report_Card.Source = LoadImageFromPath(document.Report_Card);
+		}
+
+		private BitmapImage LoadImageFromPath(string path)
+		{
+			return !string.IsNullOrEmpty(path) ? new BitmapImage(new Uri(path, UriKind.Absolute)) : null;
+		}
+
+		private string GetNextDocumentId()
+		{
+			string nextId = "1";
+			string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+
+			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
-				Picture.Source = !string.IsNullOrEmpty(document.Picture)
-					? new BitmapImage(new Uri(document.Picture, UriKind.Absolute))
-					: null;
-
-				Birth_Certificate.Source = !string.IsNullOrEmpty(document.Birth_Certificate)
-					? new BitmapImage(new Uri(document.Birth_Certificate, UriKind.Absolute))
-					: null;
-
-				Good_Moral.Source = !string.IsNullOrEmpty(document.Good_Moral)
-					? new BitmapImage(new Uri(document.Good_Moral, UriKind.Absolute))
-					: null;
-
-				TOR.Source = !string.IsNullOrEmpty(document.TOR)
-					? new BitmapImage(new Uri(document.TOR, UriKind.Absolute))
-					: null;
-
-				Medical_Clearance.Source = !string.IsNullOrEmpty(document.Medical_Clearance)
-					? new BitmapImage(new Uri(document.Medical_Clearance, UriKind.Absolute))
-					: null;
-
-				Report_Card.Source = !string.IsNullOrEmpty(document.Report_Card)
-					? new BitmapImage(new Uri(document.Report_Card, UriKind.Absolute))
-					: null;
+				string query = "SELECT TOP 1 CAST(Documents_ID AS INT) FROM Documents ORDER BY CAST(Documents_ID AS INT) DESC";
+				SqlCommand command = new SqlCommand(query, connection);
+				connection.Open();
+				object result = command.ExecuteScalar();
+				if (result != null)
+				{
+					int lastId = (int)result;
+					nextId = (lastId + 1).ToString();
+				}
 			}
+			return nextId;
 		}
 
 		private void Upload_Click(object sender, RoutedEventArgs e)
@@ -79,7 +87,6 @@ namespace LeadsTracker_FinalsProject1
 				string sourceFilePath = openFileDialog.FileName;
 				string targetFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FolderName);
 
-				// Create the target folder if it doesn't exist
 				if (!Directory.Exists(targetFolderPath))
 				{
 					Directory.CreateDirectory(targetFolderPath);
@@ -89,56 +96,37 @@ namespace LeadsTracker_FinalsProject1
 
 				File.Copy(sourceFilePath, targetFilePath, true);
 
-				// Update the corresponding Image control with the new file
 				UpdateDocumentImage(documentType, targetFilePath);
 			}
 		}
 
-		private void Camera_Click(object sender, RoutedEventArgs e)
-		{
-			//Button button = sender as Button;
-			//string documentType = button.Tag.ToString();
-
-			//var dialog = new Microsoft.Win32.OpenFileDialog();
-			//dialog.Filter = "Image Files (*.png;*.jpg;*.jpeg;*.gif;*.bmp)|*.png;*.jpg;*.jpeg;*.gif;*.bmp";
-
-			//if (dialog.ShowDialog() == true)
-			//{
-			//	string sourceFilePath = dialog.FileName;
-			//	string targetFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FolderName);
-
-			//	if (!Directory.Exists(targetFolderPath))
-			//	{
-			//		Directory.CreateDirectory(targetFolderPath);
-			//	}
-
-			//	string targetFilePath = System.IO.Path.Combine(targetFolderPath, $"{documentType}_captured_image.png");
-			//	File.Copy(sourceFilePath, targetFilePath, true);
-
-			//	UpdateDocumentImage(documentType, targetFilePath);
-			//}
-		}
 		private void UpdateDocumentImage(string documentType, string filePath)
 		{
 			switch (documentType)
 			{
 				case "LeadPicture":
 					Picture.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					document.Picture = filePath;
 					break;
 				case "BirthCert":
 					Birth_Certificate.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					document.Birth_Certificate = filePath;
 					break;
 				case "GoodMoral":
 					Good_Moral.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					document.Good_Moral = filePath;
 					break;
 				case "TOR":
 					TOR.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					document.TOR = filePath;
 					break;
 				case "MedClear":
 					Medical_Clearance.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					document.Medical_Clearance = filePath;
 					break;
 				case "RepCard":
 					Report_Card.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					document.Report_Card = filePath;
 					break;
 			}
 		}
@@ -147,7 +135,6 @@ namespace LeadsTracker_FinalsProject1
 		{
 			try
 			{
-				// Save the images and get their file paths
 				string picturePath = Picture.Source != null ? SaveDocument(Picture.Source) : null;
 				string birthCertificatePath = Birth_Certificate.Source != null ? SaveDocument(Birth_Certificate.Source) : null;
 				string goodMoralPath = Good_Moral.Source != null ? SaveDocument(Good_Moral.Source) : null;
@@ -155,7 +142,6 @@ namespace LeadsTracker_FinalsProject1
 				string medicalClearancePath = Medical_Clearance.Source != null ? SaveDocument(Medical_Clearance.Source) : null;
 				string reportCardPath = Report_Card.Source != null ? SaveDocument(Report_Card.Source) : null;
 
-				// Update the database with the file paths for non-null documents
 				if (!string.IsNullOrEmpty(picturePath) ||
 					!string.IsNullOrEmpty(birthCertificatePath) ||
 					!string.IsNullOrEmpty(goodMoralPath) ||
@@ -164,11 +150,6 @@ namespace LeadsTracker_FinalsProject1
 					!string.IsNullOrEmpty(reportCardPath))
 				{
 					UpdateDatabase(document.Documents_ID, picturePath, birthCertificatePath, goodMoralPath, torPath, medicalClearancePath, reportCardPath);
-					MessageBox.Show("Changes saved successfully.", "Save Successful", MessageBoxButton.OK, MessageBoxImage.Information);
-				}
-				else
-				{
-					MessageBox.Show("No changes to save.", "Save Information", MessageBoxButton.OK, MessageBoxImage.Information);
 				}
 			}
 			catch (Exception ex)
@@ -190,7 +171,7 @@ namespace LeadsTracker_FinalsProject1
 				string targetFilePath = System.IO.Path.Combine(targetFolderPath, $"{Guid.NewGuid()}.png");
 				using (var fileStream = new FileStream(targetFilePath, FileMode.Create))
 				{
-					BitmapEncoder encoder = new PngBitmapEncoder(); // You can change the encoder based on your image format needs
+					BitmapEncoder encoder = new PngBitmapEncoder();
 					encoder.Frames.Add(BitmapFrame.Create(bitmapImage));
 					encoder.Save(fileStream);
 				}
@@ -205,7 +186,7 @@ namespace LeadsTracker_FinalsProject1
 		{
 			try
 			{
-				string connectionString = "Your_Connection_String_Here";
+				string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
 				string query = "UPDATE Documents SET " +
 							   "Picture = ISNULL(@Picture, Picture), " +
@@ -236,6 +217,22 @@ namespace LeadsTracker_FinalsProject1
 			catch (Exception ex)
 			{
 				MessageBox.Show("An error occurred while updating the database: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
+		}
+
+		private void Camera_Click(object sender, RoutedEventArgs e)
+		{
+			Button button = sender as Button;
+			string documentType = button.Tag.ToString();
+
+			Camera cam = new Camera();
+			if (cam.ShowDialog() == true)
+			{
+				string capturedImagePath = cam.CapturedImagePath;
+				if (!string.IsNullOrEmpty(capturedImagePath))
+				{
+					UpdateDocumentImage(documentType, capturedImagePath);
+				}
 			}
 		}
 	}
