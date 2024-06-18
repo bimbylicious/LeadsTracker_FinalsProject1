@@ -26,6 +26,17 @@ namespace LeadsTracker_FinalsProject1.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True" +
+            ";Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
+        public string Lead_TrackerConnectionString {
+            get {
+                return ((string)(this["Lead_TrackerConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated " +
             "Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False")]
         public string Lead_TrackerConnectionString2 {

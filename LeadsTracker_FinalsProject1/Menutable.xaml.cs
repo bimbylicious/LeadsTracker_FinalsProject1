@@ -35,10 +35,10 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
-                // Define your query
-                string query = "SELECT * FROM Leads;";
+				// Define your query
+				string query = "SELECT * FROM Leads;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -143,7 +143,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
                 string query = "DELETE FROM Leads WHERE Lead_ID = @Lead_ID;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -285,8 +285,8 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-                string query = "UPDATE Leads SET Lead_Name = @Lead_Name, Lead_Email = @Lead_Email, " +
+                string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string query = "UPDATE Leads SET Lead_Name = @Lead_Name, Lead_Email = @Lead_Email, " +
                                "Phone_Number = @Phone_Number, Lead_Source = @Lead_Source, " +
                                "Notes = @Notes, Lead_Status = @Lead_Status, Interview_Date = @Interview_Date " +
                                "WHERE Lead_ID = @Lead_ID;";
@@ -320,7 +320,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -416,8 +416,8 @@ namespace LeadsTracker_FinalsProject1
 
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-                string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
+				string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
 
 				using (SqlConnection connection = new SqlConnection(connectionString))
 				{
