@@ -15,15 +15,21 @@
             <RowDefinition Height="139*"/>
             <RowDefinition Height="306*"/>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="250,4,0,0" TextWrapping="Wrap" TextAlignment="Center" FontWeight="Bold" Text="SOUTHVILLE LEADS TRACKER SYSTEM" VerticalAlignment="Top" Height="76" FontSize="28" Width="284" Grid.Row="2"/>
+        <TextBlock HorizontalAlignment="Left" Margin="250,4,0,0" TextWrapping="Wrap" TextAlignment="Center" Text="SOUTHVILLE LEADS TRACKER SYSTEM" VerticalAlignment="Top" Height="76" FontSize="28" Width="284" Grid.Row="2" FontFamily="Noto Sans Thin Condensed" FontWeight="Bold"/>
         <TextBox x:Name="UsernameBox" FontSize="16" FontWeight="DemiBold" VerticalContentAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="244" Height="38" Margin="272,92,0,0" Grid.Row="2" Foreground="#FF9C9C9C" GotFocus="UsernameBox_GotFocus" LostFocus="UsernameBox_LostFocus" KeyUp="UsernameBox_KeyUp"/>
         <TextBox x:Name="PasswordBox" FontSize="16" FontWeight="DemiBold" VerticalContentAlignment="Center" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="244" Height="38" Grid.Row="2" Foreground="#FF9C9C9C" GotFocus="PasswordBox_GotFocus" LostFocus="PasswordBox_LostFocus" Margin="272,147,0,0" KeyUp="PasswordBox_KeyUp"/>
-        <Button x:Name="LoginBtn" FontWeight="Bold" FontSize="13" Content="LOGIN" HorizontalAlignment="Left" Margin="352,214,0,0" VerticalAlignment="Top" Width="84" Click="LoginBtn_Click" Height="30" Grid.Row="2" Background="#FF750000" Foreground="White" BorderBrush="White">
+        <Button x:Name="LoginBtn" FontSize="13" Content="LOGIN" HorizontalAlignment="Left" Margin="352,214,0,0" VerticalAlignment="Top" Width="84" Click="LoginBtn_Click" Height="30" Grid.Row="2" Foreground="Black" BorderBrush="Black" FontWeight="Bold">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="6"/>
                 </Style>
             </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFC2B2D9" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
         </Button>
         <Image Margin="327,7,343,1" Source="Southville Logo.png" Grid.RowSpan="2"/>
 
