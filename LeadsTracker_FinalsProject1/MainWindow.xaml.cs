@@ -25,13 +25,14 @@ namespace LeadsTracker_FinalsProject1
         DataClasses1DataContext _ltDC = null;
         string userName = "";
         bool loginFlag = false;
+        public static bool isAdmin = false;
 
         public MainWindow()
         {
             InitializeComponent();
 
             _ltDC = new DataClasses1DataContext(
-                Properties.Settings.Default.Lead_TrackerConnectionString);
+                Properties.Settings.Default.Lead_TrackerConnectionString1);
         }
 
         private void LoginBtn_Click(object sender, RoutedEventArgs e)
@@ -54,6 +55,7 @@ namespace LeadsTracker_FinalsProject1
                         {
                             loginFlag = true;
                             userName = login.Staff_Username;
+                            isAdmin = login.Staff_Role.ToLower() == "admin";
                             _ltDC.SubmitChanges();
                         }
                     }

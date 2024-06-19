@@ -19,7 +19,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Left" Margin="22,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False" Grid.ColumnSpan="2" CanUserReorderColumns="False">
+        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False" Grid.ColumnSpan="2" CanUserReorderColumns="False" SelectionChanged="DataGridXAML_SelectionChanged">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#FF4E2A6D"/>
@@ -33,13 +33,13 @@
                 <DataGridTextColumn Header="Lead ID" Width="100" Binding="{Binding Lead_ID}"/>
                 <DataGridTextColumn Header="Date" Width="100" Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Lead Source" Width="130" Binding="{Binding Lead_Source}"/>
-                <DataGridTextColumn Header="Lead Name" Width="220" Binding="{Binding Lead_Name}"/>
-                <DataGridTextColumn Header="Lead Email" Width="262" Binding="{Binding Lead_Email}"/>
-                <DataGridTextColumn Header="Phone Number" Width="200" Binding="{Binding Phone_Number}"/>
-                <DataGridTextColumn Header="Notes" Width="200" Binding="{Binding Notes}"/>
+                <DataGridTextColumn Header="Lead Name" Width="150" Binding="{Binding Lead_Name}"/>
+                <DataGridTextColumn Header="Lead Email" Width="230" Binding="{Binding Lead_Email}"/>
+                <DataGridTextColumn Header="Phone Number" Width="170" Binding="{Binding Phone_Number}"/>
+                <DataGridTextColumn Header="Notes" Width="300" Binding="{Binding Notes}"/>
                 <DataGridTextColumn Header="Documents ID" Binding="{Binding Documents_ID}"/>
                 <DataGridTextColumn Header="Lead Status" Width="80" Binding="{Binding Lead_Status}"/>
-                <DataGridTextColumn Header="Interview Date" Width="136" Binding="{Binding Interview_Date}"/>
+                <DataGridTextColumn Header="Interview Date" Width="150" Binding="{Binding Interview_Date}"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -87,6 +87,6 @@
         <Label Content="Status" HorizontalAlignment="Left" Margin="406,29,0,0" VerticalAlignment="Top" Foreground="White" Height="26" Width="42"/>
         <Image HorizontalAlignment="Left" Height="100" Margin="406,273,0,0" VerticalAlignment="Top" Width="100"/>
         <Image Margin="22,33,1380,580" Source="/th.jpg" Stretch="Fill"/>
-
+        <Button Content="Lead ID" HorizontalAlignment="Left" Margin="12,60,0,0" VerticalAlignment="Top" Background="#FF4E2A6D" Foreground="White" FontWeight="Bold" Width="106" HorizontalContentAlignment="Left" Height="17" Click="leadSort_Click"/>
     </Grid>
 </Window>

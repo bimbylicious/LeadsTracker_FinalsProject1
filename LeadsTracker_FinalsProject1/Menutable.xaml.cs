@@ -24,18 +24,27 @@ namespace LeadsTracker_FinalsProject1
     public partial class Menutable : Window
     {
         private List<Lead> originalLeads; // Variable to store the original data source
+        private bool isAscendingOrder = true; // Variable to track sorting order
         public Menutable()
         {
             InitializeComponent();
             search.GotFocus += (s, ev) => { search.Text = ""; };
             LoadData();
 
+            if (MainWindow.isAdmin)
+            {
+                remove.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                remove.Visibility = Visibility.Visible;
+            }
         }
         private void LoadData()
         {
             try
             {
-				string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
 				// Define your query
 				string query = "SELECT * FROM Leads;";
@@ -63,8 +72,15 @@ namespace LeadsTracker_FinalsProject1
                             Lead_Status = reader["Lead_Status"].ToString(),
                             Interview_Date = reader["Interview_Date"] != DBNull.Value ? reader["Interview_Date"].ToString() : null
                         };
-
-                        leads.Add(lead);
+                        if (MainWindow.isAdmin == true)
+                        {
+                            if (lead.Lead_Status != "Dead")
+                            {
+                                leads.Add(lead);
+                            }
+                        }
+                        else
+                        { leads.Add(lead); }
                     }
                     DataGridXAML.ItemsSource = leads;
                     originalLeads = leads;
@@ -75,6 +91,7 @@ namespace LeadsTracker_FinalsProject1
                 // Handle any exceptions that occur during data retrieval
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
+            SortLeadsByLeadID();
         }
 
         private void FilterChanged(object sender, SelectionChangedEventArgs e)
@@ -119,32 +136,32 @@ namespace LeadsTracker_FinalsProject1
         {
             if (DataGridXAML.SelectedItem is Lead selectedLead)
             {
-                string message = $"Do you want to remove the following lead?\n\n" +
+                string message = $"Do you want to mark the following lead as dead?\n\n" +
                                  $"Lead ID: {selectedLead.Lead_ID}\n" +
                                  $"Lead Name: {selectedLead.Lead_Name}\n" +
                                  $"Lead Email: {selectedLead.Lead_Email}\n" +
                                  $"Phone Number: {selectedLead.Phone_Number}";
 
-                MessageBoxResult result = MessageBox.Show(message, "Confirm Delete", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                MessageBoxResult result = MessageBox.Show(message, "Confirm Mark as Dead", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    DeleteLead(selectedLead.Lead_ID);
+                    MarkLeadAsDead(selectedLead.Lead_ID);
                     LoadData(); // Refresh the DataGrid
                 }
             }
             else
             {
-                MessageBox.Show("Please select a lead to remove.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a lead to mark as dead.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
-        private void DeleteLead(string leadID)
+        private void MarkLeadAsDead(string leadID)
         {
             try
             {
-                string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-                string query = "DELETE FROM Leads WHERE Lead_ID = @Lead_ID;";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string query = "UPDATE Leads SET Lead_Status = 'Dead' WHERE Lead_ID = @Lead_ID;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -155,18 +172,7 @@ namespace LeadsTracker_FinalsProject1
                     command.ExecuteNonQuery();
                 }
 
-
-                string queryDeleteDocument = "DELETE FROM Documents WHERE Documents_ID = @Documents_ID;";
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlCommand command = new SqlCommand(queryDeleteDocument, connection);
-                    command.Parameters.AddWithValue("@Documents_ID", leadID);
-
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-
-                MessageBox.Show("Lead and corresponding documents deleted successfully.", "Lead Deleted", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Lead marked as dead successfully.", "Lead Updated", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -285,7 +291,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 				string query = "UPDATE Leads SET Lead_Name = @Lead_Name, Lead_Email = @Lead_Email, " +
                                "Phone_Number = @Phone_Number, Lead_Source = @Lead_Source, " +
                                "Notes = @Notes, Lead_Status = @Lead_Status, Interview_Date = @Interview_Date " +
@@ -320,7 +326,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-                string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -416,7 +422,7 @@ namespace LeadsTracker_FinalsProject1
 
             try
             {
-				string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 				string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
 
 				using (SqlConnection connection = new SqlConnection(connectionString))
@@ -447,6 +453,33 @@ namespace LeadsTracker_FinalsProject1
 			}
 
             return document;
+        }
+
+        private void DataGridXAML_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void leadSort_Click(object sender, RoutedEventArgs e)
+        {
+            SortLeadsByLeadID();
+        }
+
+        private void SortLeadsByLeadID()
+        {
+            if (originalLeads == null)
+            {
+                return;
+            }
+
+            var sortedLeads = isAscendingOrder
+                ? originalLeads.OrderBy(lead => int.TryParse(lead.Lead_ID, out int id) ? id : int.MaxValue).ToList()
+                : originalLeads.OrderByDescending(lead => int.TryParse(lead.Lead_ID, out int id) ? id : int.MinValue).ToList();
+
+            isAscendingOrder = !isAscendingOrder;
+
+            DataGridXAML.ItemsSource = null;
+            DataGridXAML.ItemsSource = sortedLeads;
         }
     }
 }

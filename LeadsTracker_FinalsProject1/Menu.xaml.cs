@@ -28,6 +28,7 @@ namespace LeadsTracker_FinalsProject1
         private ObservableCollection<Lead> leads;
         private Lead selectedLead;
         private ObservableCollection<Lead> originalLeads;
+        private bool isAscendingOrder = true; // Variable to track sorting order
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -36,6 +37,14 @@ namespace LeadsTracker_FinalsProject1
             InitializeComponent();
             LoadData(); // Load data into the ListBox
             DataContext = this; // Set DataContext for data binding
+            if (MainWindow.isAdmin)
+            {
+                removeButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                removeButton.Visibility = Visibility.Visible;
+            }
         }
 
         public ObservableCollection<Lead> Leads
@@ -63,7 +72,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-				string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 				string query = "SELECT Lead_ID, Date, Lead_Name, Lead_Status, Lead_Email, Phone_Number, Lead_Source, Notes, Documents_ID, Interview_Date FROM Leads;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -88,13 +97,23 @@ namespace LeadsTracker_FinalsProject1
                             Documents_ID = reader["Documents_ID"].ToString(),
                             Interview_Date = reader["Interview_Date"].ToString()
                         };
-
-                        Leads.Add(lead);
+                        if (MainWindow.isAdmin == true)
+                        {
+                            if (lead.Lead_Status != "Dead")
+                            {
+                                leads.Add(lead);
+                            }
+                        }
+                        else
+                        {
+                            leads.Add(lead);
+                        }
                     }
                     leadList.ItemsSource = leads;
                     originalLeads = leads;
                 }
                 UpdateCounters();
+                SortLeadsByLeadID();
             }
             catch (Exception ex)
             {
@@ -157,6 +176,54 @@ namespace LeadsTracker_FinalsProject1
 
             leadList.ItemsSource = null;
             leadList.ItemsSource = filteredLeads;
+        }
+
+        private void removeButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (leadList.SelectedItem is Lead selectedLead)
+            {
+                string message = $"Do you want to mark the following lead as dead?\n\n" +
+                                 $"Lead ID: {selectedLead.Lead_ID}\n" +
+                                 $"Lead Name: {selectedLead.Lead_Name}\n" +
+                                 $"Lead Email: {selectedLead.Lead_Email}\n" +
+                                 $"Phone Number: {selectedLead.Phone_Number}";
+
+                MessageBoxResult result = MessageBox.Show(message, "Confirm Mark as Dead", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    MarkLeadAsDead(selectedLead.Lead_ID);
+                    LoadData(); // Refresh the DataGrid
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a lead to mark as dead.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void MarkLeadAsDead(string leadID)
+        {
+            try
+            {
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string query = "UPDATE Leads SET Lead_Status = 'Dead' WHERE Lead_ID = @Lead_ID;";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Lead_ID", leadID);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Lead marked as dead successfully.", "Lead Updated", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
         }
 
         private void UpdateTextBoxes()
@@ -243,7 +310,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-				string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 				string query = "UPDATE Leads SET Lead_Name=@LeadName, Lead_Status=@LeadStatus, Lead_Email=@LeadEmail, Date=@Date, Lead_Source=@LeadSource, Phone_Number=@PhoneNumber, Notes=@Notes, Documents_ID=@DocumentsID, Interview_Date=@InterviewDate WHERE Lead_ID=@LeadID";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -477,7 +544,7 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-				string connectionString = "Data Source=LAPTOP-VQRQBKBN\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
 				using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -531,7 +598,27 @@ namespace LeadsTracker_FinalsProject1
             }
         }
 
+        private void leadSort_Click(object sender, RoutedEventArgs e)
+        {
+            SortLeadsByLeadID();
+        }
 
+        private void SortLeadsByLeadID()
+        {
+            if (originalLeads == null)
+            {
+                return;
+            }
+
+            var sortedLeads = isAscendingOrder
+                ? originalLeads.OrderBy(lead => int.TryParse(lead.Lead_ID, out int id) ? id : int.MaxValue).ToList()
+                : originalLeads.OrderByDescending(lead => int.TryParse(lead.Lead_ID, out int id) ? id : int.MinValue).ToList();
+
+            isAscendingOrder = !isAscendingOrder;
+
+            leadList.ItemsSource = null;
+            leadList.ItemsSource = sortedLeads;
+        }
 
         private void clear_Click(object sender, RoutedEventArgs e)
         {

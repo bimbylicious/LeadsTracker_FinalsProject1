@@ -48,7 +48,7 @@
         </TextBlock>
         <TextBlock x:Name="closedCounter" Text="50" FontSize="24" Foreground="Red" Margin="172,79,582,326"/>
 
-        <TextBlock Text="Leads" FontWeight="Bold" FontSize="16" Margin="13,118,743,295" Foreground="Black"/>
+        <TextBlock Text="Leads" FontWeight="Bold" FontSize="16" Margin="10,109,746,304" Foreground="Black"/>
 
         <ListBox x:Name="leadList" ItemsSource="{Binding Leads}" SelectedItem="{Binding SelectedLead}" Margin="8,148,419,36" Width="Auto">
             <ListBox.ItemTemplate>
@@ -151,5 +151,15 @@
         </ComboBox>
         <Image HorizontalAlignment="Left" Height="100" Margin="194,198,0,0" VerticalAlignment="Top" Width="100"/>
         <Image Margin="76,124,706,297" Source="/th.jpg" Stretch="Fill"/>
+        <Button x:Name="removeButton" Content="Remove Lead" HorizontalAlignment="Left" Margin="145,404,0,0" VerticalAlignment="Top" Click="removeButton_Click" Width="91" BorderBrush="#FF060606" FontWeight="Bold">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFC2B2D9" Offset="1"/>
+                    <GradientStop Color="#FFBC937C"/>
+                    <GradientStop Color="{DynamicResource GradientStopColor1}"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="Sort by ID" HorizontalAlignment="Left" Margin="8,130,0,0" VerticalAlignment="Top" Background="#FF4E2A6D" Foreground="White" FontWeight="Bold" Width="52" Height="16" Click="leadSort_Click" FontSize="9"/>
     </Grid>
 </Window>
