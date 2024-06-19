@@ -8,7 +8,7 @@
         Title="Camera" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         Closing="Window_Closing">
     <Grid>
-        <Image x:Name="cameraImage" Stretch="UniformToFill" Margin="148,49,148,84" />
+        <Image x:Name="cameraImage" Stretch="UniformToFill" Height="250" Width="250" Margin="247,49,247,84" />
         <Button Content="Capture Image" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Click="CaptureImage_Click" />
     </Grid>
 </Window>
