@@ -37,14 +37,14 @@ namespace LeadsTracker_FinalsProject1
             InitializeComponent();
             LoadData(); // Load data into the ListBox
             DataContext = this; // Set DataContext for data binding
-            if (MainWindow.isAdmin)
-            {
-                removeButton.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                removeButton.Visibility = Visibility.Visible;
-            }
+            //if (MainWindow.isAdmin)
+            //{
+            //    removeButton.Visibility = Visibility.Collapsed;
+            //}
+            //else
+            //{
+            //    removeButton.Visibility = Visibility.Visible;
+            //}
         }
 
         public ObservableCollection<Lead> Leads

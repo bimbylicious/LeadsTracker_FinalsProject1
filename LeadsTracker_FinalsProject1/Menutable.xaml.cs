@@ -31,14 +31,14 @@ namespace LeadsTracker_FinalsProject1
             search.GotFocus += (s, ev) => { search.Text = ""; };
             LoadData();
 
-            if (MainWindow.isAdmin)
-            {
-                remove.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                remove.Visibility = Visibility.Visible;
-            }
+            //if (MainWindow.isAdmin)
+            //{
+            //    remove.Visibility = Visibility.Collapsed;
+            //}
+            //else
+            //{
+            //    remove.Visibility = Visibility.Visible;
+            //}
         }
         private void LoadData()
         {
