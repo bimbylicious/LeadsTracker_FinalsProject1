@@ -23,7 +23,6 @@ namespace LeadsTracker_FinalsProject1
 	/// </summary>
 	public partial class Camera : Window
 	{
-		private FilterInfoCollection videoDevices;
 		private VideoCaptureDevice videoSource;
 		public string CapturedImagePath { get; private set; }
 
@@ -52,7 +51,6 @@ namespace LeadsTracker_FinalsProject1
 		{
 			try
 			{
-				// Convert the new frame to BitmapImage to display in the Image element
 				BitmapImage bitmapImage = ConvertToBitmapImage(eventArgs.Frame);
 				Dispatcher.Invoke(() => cameraImage.Source = bitmapImage);
 			}

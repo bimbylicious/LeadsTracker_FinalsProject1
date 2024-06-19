@@ -19,7 +19,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Left" Margin="22,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+        <DataGrid x:Name="DataGridXAML" HorizontalAlignment="Left" Margin="22,60,0,0" VerticalAlignment="Top" Width="1456" Height="483" CanUserResizeColumns="False" AutoGenerateColumns="False" Grid.ColumnSpan="2" CanUserReorderColumns="False">
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridColumnHeader}">
                     <Setter Property="Background" Value="#FF4E2A6D"/>
