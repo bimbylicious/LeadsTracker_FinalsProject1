@@ -150,7 +150,7 @@
             <ComboBoxItem Content="Dead"/>
         </ComboBox>
         <Image HorizontalAlignment="Left" Height="100" Margin="194,198,0,0" VerticalAlignment="Top" Width="100"/>
-        <Image Margin="76,124,706,297" Source="/th.jpg" Stretch="Fill"/>
+        <Image Margin="76,124,706,297" Source="th.jpg" Stretch="Fill"/>
         <Button x:Name="removeButton" Content="Remove Lead" HorizontalAlignment="Left" Margin="145,404,0,0" VerticalAlignment="Top" Click="removeButton_Click" Width="91" BorderBrush="#FF060606" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

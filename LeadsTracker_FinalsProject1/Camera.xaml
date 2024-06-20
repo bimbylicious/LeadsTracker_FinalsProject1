@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
-        Title="Camera" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
+        Title="Camera" Height="450" Width="435" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize"
         Closing="Window_Closing">
     <Grid>
-        <Image x:Name="cameraImage" Stretch="UniformToFill" Height="250" Width="250" Margin="247,49,247,84" />
-        <Button Content="Capture Image" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20" Click="CaptureImage_Click" />
+        <Image x:Name="cameraImage" Stretch="UniformToFill" Height="250" Width="250" Margin="92,92,93,92" />
+        <Button Content="Capture Image" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,380,0,0" Click="CaptureImage_Click" />
     </Grid>
 </Window>
