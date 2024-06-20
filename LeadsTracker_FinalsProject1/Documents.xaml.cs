@@ -25,11 +25,14 @@ namespace LeadsTracker_FinalsProject1
 	{
 		private const string FolderName = "UploadedDocuments";
 		private Document document;
+		private string imagesFolderPath;
 
 		public Documents(Document document)
 		{
 			InitializeComponent();
 			this.document = document ?? new Document { Documents_ID = GetNextDocumentId() };
+
+			InitializeImageFolder();
 
 			if (document != null)
 			{
@@ -37,8 +40,20 @@ namespace LeadsTracker_FinalsProject1
 			}
 		}
 
+		private void InitializeImageFolder()
+		{
+			imagesFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FolderName);
+
+			if (!Directory.Exists(imagesFolderPath))
+			{
+				Directory.CreateDirectory(imagesFolderPath);
+			}
+		}
+
 		private void LoadDocumentImages(Document document)
 		{
+			Picture.Source = LoadImageFromPath(document.Picture);
+			Birth_Certificate.Source = LoadImageFromPath(document.Birth_Certificate);
 			Picture.Source = LoadImageFromPath(document.Picture);
 			Birth_Certificate.Source = LoadImageFromPath(document.Birth_Certificate);
 			Good_Moral.Source = LoadImageFromPath(document.Good_Moral);
@@ -79,24 +94,27 @@ namespace LeadsTracker_FinalsProject1
 
 			OpenFileDialog openFileDialog = new OpenFileDialog
 			{
-				Filter = "Image Files (*.png;*.jpg;*.jpeg;)|*.png;*.jpg;*.jpeg;"
+				Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg;"
 			};
 
 			if (openFileDialog.ShowDialog() == true)
 			{
 				string sourceFilePath = openFileDialog.FileName;
-				string targetFolderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, FolderName);
+				string targetFilePath = System.IO.Path.Combine(imagesFolderPath, System.IO.Path.GetFileName(sourceFilePath));
 
-				if (!Directory.Exists(targetFolderPath))
+				try
 				{
-					Directory.CreateDirectory(targetFolderPath);
+					File.Copy(sourceFilePath, targetFilePath, true);
+
+					UpdateDocumentImage(documentType, targetFilePath);
+
+					// Update the Image control in XAML
+					UpdateImageControl(documentType, targetFilePath);
 				}
-
-				string targetFilePath = System.IO.Path.Combine(targetFolderPath, System.IO.Path.GetFileName(sourceFilePath));
-
-				File.Copy(sourceFilePath, targetFilePath, true);
-
-				UpdateDocumentImage(documentType, targetFilePath);
+				catch (Exception ex)
+				{
+					MessageBox.Show($"Error uploading file: {ex.Message}");
+				}
 			}
 		}
 
@@ -131,6 +149,34 @@ namespace LeadsTracker_FinalsProject1
 			}
 		}
 
+		private void UpdateImageControl(string documentType, string filePath)
+		{
+			switch (documentType)
+			{
+				case "LeadPicture":
+					Picture.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					break;
+				case "BirthCert":
+					Birth_Certificate.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					break;
+				case "GoodMoral":
+					Good_Moral.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					break;
+				case "TOR":
+					TOR.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					break;
+				case "MedClear":
+					Medical_Clearance.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					break;
+				case "RepCard":
+					Report_Card.Source = new BitmapImage(new Uri(filePath, UriKind.Absolute));
+					break;
+				default:
+					// Handle unknown document type here
+					break;
+			}
+		}
+
 		private void SaveBtn_Click(object sender, RoutedEventArgs e)
 		{
 			try
@@ -157,7 +203,6 @@ namespace LeadsTracker_FinalsProject1
 				MessageBox.Show("An error occurred while saving changes: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
-
 		private string SaveDocument(ImageSource imageSource)
 		{
 			if (imageSource is BitmapImage bitmapImage)
@@ -181,9 +226,8 @@ namespace LeadsTracker_FinalsProject1
 
 			return null;
 		}
-
-		private void UpdateDatabase(string documentsId, string picturePath, string birthCertificatePath, string goodMoralPath, string torPath, string medicalClearancePath, string reportCardPath)
-		{
+	private void UpdateDatabase(string documentsId, string picturePath, string birthCertificatePath, string goodMoralPath, string torPath, string medicalClearancePath, string reportCardPath)
+	{
 			try
 			{
 				string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
@@ -218,8 +262,7 @@ namespace LeadsTracker_FinalsProject1
 			{
 				MessageBox.Show("An error occurred while updating the database: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
-		}
-
+	}
 		private void Camera_Click(object sender, RoutedEventArgs e)
 		{
 			Button button = sender as Button;

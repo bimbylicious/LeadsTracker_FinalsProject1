@@ -573,20 +573,6 @@ namespace LeadsTracker_FinalsProject1
 
                     commandInsert.ExecuteNonQuery();
 
-                    string queryInsertDocument = "INSERT INTO Documents (Documents_ID, Picture, Birth_Certificate, Good_Moral, TOR, Medical_Clearance, Report_Card) " +
-                             "VALUES (@Documents_ID, @Picture, @Birth_Certificate, @Good_Moral, @TOR, @Medical_Clearance, @Report_Card);";
-
-                    SqlCommand commandInsertDocument = new SqlCommand(queryInsertDocument, connection);
-                    commandInsertDocument.Parameters.AddWithValue("@Documents_ID", nextLeadID);
-                    commandInsertDocument.Parameters.AddWithValue("@Picture", $@"C:\Users\PC\OneDrive\Pictures\documents\Picture\{nextLeadID}");
-                    commandInsertDocument.Parameters.AddWithValue("@Birth_Certificate", $@"C:\Users\PC\OneDrive\Pictures\documents\Birth_Certificate\{nextLeadID}");
-                    commandInsertDocument.Parameters.AddWithValue("@Good_Moral", $@"C:\Users\PC\OneDrive\Pictures\documents\Good_Moral\{nextLeadID}");
-                    commandInsertDocument.Parameters.AddWithValue("@TOR", $@"C:\Users\PC\OneDrive\Pictures\documents\TOR\{nextLeadID}");
-                    commandInsertDocument.Parameters.AddWithValue("@Medical_Clearance", $@"C:\Users\PC\OneDrive\Pictures\documents\Medical_Clearance\{nextLeadID}");
-                    commandInsertDocument.Parameters.AddWithValue("@Report_Card", $@"C:\Users\PC\OneDrive\Pictures\documents\Report_Card\{nextLeadID}");
-
-                    commandInsertDocument.ExecuteNonQuery();
-
                     MessageBox.Show("New lead added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
