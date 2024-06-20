@@ -55,7 +55,7 @@ namespace LeadsTracker_FinalsProject1
 		private string GetNextDocumentId()
 		{
 			string nextId = "1";
-			string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+			string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
 			using (SqlConnection connection = new SqlConnection(connectionString))
 			{
@@ -186,7 +186,7 @@ namespace LeadsTracker_FinalsProject1
 		{
 			try
 			{
-				string connectionString = "Data Source=DESKTOPMIGUEL;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
 
 				string query = "UPDATE Documents SET " +
 							   "Picture = ISNULL(@Picture, Picture), " +
