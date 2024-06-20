@@ -66,7 +66,7 @@
         <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="427,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="427,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="427,313,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="336" Height="49"/>
-        <Button x:Name="files" Content="View Files" HorizontalAlignment="Left" Margin="697,389,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="70">
+        <Button x:Name="files" Content="View Files" HorizontalAlignment="Left" Margin="697,389,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="70" Click="filesButton_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -161,5 +161,14 @@
             </Button.Background>
         </Button>
         <Button Content="Sort by ID" HorizontalAlignment="Left" Margin="8,130,0,0" VerticalAlignment="Top" Background="#FF4E2A6D" Foreground="White" FontWeight="Bold" Width="52" Height="16" Click="leadSort_Click" FontSize="9"/>
+        <TextBlock Text="Name" FontWeight="Bold" Margin="470,72,291,341" Foreground="Black"/>
+        <TextBlock Text="Email" FontWeight="Bold" Margin="471,127,290,286" Foreground="Black"/>
+        <TextBlock Text="Number" FontWeight="Bold" Margin="465,181,286,232" Foreground="Black"/>
+        <TextBlock Text="Date Added" FontWeight="Bold" Margin="454,231,273,182" Foreground="Black"/>
+        <TextBlock Text="Document ID" FontWeight="Bold" Margin="649,179,68,234" Foreground="Black"/>
+        <TextBlock Text="Interview Date" FontWeight="Bold" Margin="647,233,68,180" Foreground="Black"/>
+        <TextBlock Text="Notes" FontWeight="Bold" Margin="575,289,186,124" Foreground="Black"/>
+        <TextBlock Text="Status" FontWeight="Bold" Margin="671,130,88,283" Foreground="Black"/>
+        <TextBlock Text="Source" FontWeight="Bold" Margin="667,71,88,342" Foreground="Black"/>
     </Grid>
 </Window>

@@ -126,5 +126,6 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Click="backButton_Click"/>
     </Grid>
 </Window>

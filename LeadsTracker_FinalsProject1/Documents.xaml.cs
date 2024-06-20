@@ -278,5 +278,10 @@ namespace LeadsTracker_FinalsProject1
 				}
 			}
 		}
-	}
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+			this.Close();
+        }
+    }
 }

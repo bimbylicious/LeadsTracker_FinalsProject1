@@ -573,6 +573,12 @@ namespace LeadsTracker_FinalsProject1
 
                     commandInsert.ExecuteNonQuery();
 
+                    string queryInsertDocument = "INSERT INTO Documents (Documents_ID) " + "VALUES (@Documents_ID);";
+                    SqlCommand commandInsertDocument = new SqlCommand(queryInsertDocument, connection);
+                    commandInsertDocument.Parameters.AddWithValue("@Documents_ID", nextLeadID);
+
+                    commandInsertDocument.ExecuteNonQuery();
+
                     MessageBox.Show("New lead added successfully!", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
 
@@ -610,6 +616,59 @@ namespace LeadsTracker_FinalsProject1
         {
             // Clear textboxes
             ClearTextBoxes();
+        }
+
+        private void filesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (leadList.SelectedItem is Lead selectedLead)
+            {
+                var document = GetDocumentForLead(selectedLead.Documents_ID);
+                Documents docu = new Documents(document);
+                docu.Show();
+            }
+            else
+            {
+                MessageBox.Show("Please select a lead to view documents.", "No Lead Selected", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private Document GetDocumentForLead(string documentsId)
+        {
+            Document document = null;
+
+            try
+            {
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string query = "SELECT * FROM Documents WHERE Documents_ID = @Documents_ID";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Documents_ID", documentsId);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        document = new Document
+                        {
+                            Documents_ID = reader["Documents_ID"].ToString(),
+                            Picture = reader["Picture"] != DBNull.Value ? reader["Picture"].ToString() : null,
+                            Birth_Certificate = reader["Birth_Certificate"] != DBNull.Value ? reader["Birth_Certificate"].ToString() : null,
+                            Good_Moral = reader["Good_Moral"] != DBNull.Value ? reader["Good_Moral"].ToString() : null,
+                            TOR = reader["TOR"] != DBNull.Value ? reader["TOR"].ToString() : null,
+                            Medical_Clearance = reader["Medical_Clearance"] != DBNull.Value ? reader["Medical_Clearance"].ToString() : null,
+                            Report_Card = reader["Report_Card"] != DBNull.Value ? reader["Report_Card"].ToString() : null
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+
+            return document;
         }
     }
 }

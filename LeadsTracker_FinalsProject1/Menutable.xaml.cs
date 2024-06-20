@@ -354,6 +354,12 @@ namespace LeadsTracker_FinalsProject1
                     commandInsert.Parameters.AddWithValue("@Interview_Date", newLead.Interview_Date ?? (object)DBNull.Value);
 
                     commandInsert.ExecuteNonQuery();
+
+                    string queryInsertDocument = "INSERT INTO Documents (Documents_ID) " + "VALUES (@Documents_ID);";
+                    SqlCommand commandInsertDocument = new SqlCommand(queryInsertDocument, connection);
+                    commandInsertDocument.Parameters.AddWithValue("@Documents_ID", nextLeadID);
+
+                    commandInsertDocument.ExecuteNonQuery();
                 }
 
                 MessageBox.Show("New lead saved successfully.", "Lead Saved", MessageBoxButton.OK, MessageBoxImage.Information);
