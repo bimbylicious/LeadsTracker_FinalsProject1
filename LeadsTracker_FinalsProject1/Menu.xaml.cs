@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
@@ -215,12 +214,11 @@ namespace LeadsTracker_FinalsProject1
             try
             {
                 string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-                string storedProcedureName = "usp_MarkLeadAsDead";
+                string query = "UPDATE Leads SET Lead_Status = 'Dead' WHERE Lead_ID = @Lead_ID;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand command = new SqlCommand(storedProcedureName, connection);
-                    command.CommandType = CommandType.StoredProcedure;
+                    SqlCommand command = new SqlCommand(query, connection);
                     command.Parameters.AddWithValue("@Lead_ID", leadID);
 
                     connection.Open();
@@ -234,7 +232,6 @@ namespace LeadsTracker_FinalsProject1
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
-
 
         private void UpdateTextBoxes()
         {
@@ -289,12 +286,6 @@ namespace LeadsTracker_FinalsProject1
         {
             if (SelectedLead != null)
             {
-                // Check if Lead_ID is null or empty
-                if (string.IsNullOrEmpty(SelectedLead.Lead_ID))
-                {
-                    MessageBox.Show("This is not an existing lead, how can you possibly save changes to it?", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
 
                 // Update the selected lead with the current TextBox values
                 SelectedLead.Lead_Name = nameBox.Text;
@@ -307,6 +298,10 @@ namespace LeadsTracker_FinalsProject1
                 SelectedLead.Documents_ID = documentsBox.Text;
                 SelectedLead.Interview_Date = interviewDateBox.Text;
 
+                if (!IsValidLead(SelectedLead))
+                {
+                    return; // Validation failed, exit without saving
+                }
                 // Save changes back to the database
                 SaveChangesToDatabase(SelectedLead);
             }
@@ -316,28 +311,127 @@ namespace LeadsTracker_FinalsProject1
             }
         }
 
+        private bool IsValidLead(Lead lead)
+        {
+            // Check Lead_Name
+            if (string.IsNullOrEmpty(lead.Lead_Name))
+            {
+                MessageBox.Show("Please enter the lead's name.", "Missing Lead Name", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            // Check Lead_Source
+            List<string> validSources = new List<string> { "Facebook", "Instagram", "Twitter", "Physical ads", "Referral" };
+            if (!validSources.Contains(lead.Lead_Source, StringComparer.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Invalid lead source. Choose from: Facebook, Instagram, Twitter, Referral, and Physical ads", "Invalid Lead Source", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            // Check Lead_Status
+            List<string> validStatuses = new List<string> { "Cold", "Warm", "Hot", "Dead" };
+            if (!validStatuses.Contains(lead.Lead_Status, StringComparer.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Invalid lead status. Choose from: Cold, Warm, Hot, and Dead", "Invalid Lead Status", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+            // Check Phone_Number
+            if (!string.IsNullOrEmpty(lead.Phone_Number))
+            {
+                if (lead.Phone_Number.Any(char.IsLetter))
+                {
+                    MessageBox.Show("Phone number cannot contain letters.", "Invalid Phone Number", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                if (lead.Phone_Number.Length > 15)
+                {
+                    MessageBox.Show("Phone number cannot exceed 15 digits.", "Invalid Phone Number", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+            }
+
+            // Check Lead_Email
+            if (!string.IsNullOrEmpty(lead.Lead_Email))
+            {
+                // Trim leading and trailing whitespace
+                string trimmedEmail = lead.Lead_Email.Trim();
+
+                if (trimmedEmail.Contains(" "))
+                {
+                    MessageBox.Show("Email cannot contain spaces.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                if (trimmedEmail.Any(c => c > 127))
+                {
+                    MessageBox.Show("Email must only contain ASCII characters.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                if (!trimmedEmail.Contains("@"))
+                {
+                    MessageBox.Show("Email must contain '@' sign.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                string[] consecutiveSpecialCharacters = {
+            "!!", "@@", "##", "$$", "%%", "^^", "&&", "**", "((", "))", "__", "--", "==", "{{", "[[", "]]", "}}", "\\", ";;", "::", "''", ",,", "..", ">>", "<<", "//", "??"
+        };
+                foreach (var special in consecutiveSpecialCharacters)
+                {
+                    if (trimmedEmail.Contains(special))
+                    {
+                        MessageBox.Show("Email cannot contain consecutive special characters like '..', '::', etc.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return false;
+                    }
+                }
+
+                // Check for special characters at the beginning or end
+                char[] specialChars = { '!', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '=', '{', '[', ']', '}', '\\', '|', ';', ':', '\'', '"', ',', '.', '<', '>', '/', '?' };
+                if (specialChars.Contains(trimmedEmail[0]) || specialChars.Contains(trimmedEmail[trimmedEmail.Length - 1]))
+                {
+                    MessageBox.Show("Email cannot start or end with special characters.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+            }
+
+            // Check at least one of Email or Phone Number
+            if (string.IsNullOrEmpty(lead.Lead_Email) && string.IsNullOrEmpty(lead.Phone_Number))
+            {
+                MessageBoxResult noContactResult = MessageBox.Show("Do you want to save the lead without email nor phone number?", "Missing Contact Information", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (noContactResult != MessageBoxResult.Yes)
+                {
+                    return false; // User opted not to save without contact info
+                }
+            }
+
+            return true; // Lead is valid
+        }
+
+
         private void SaveChangesToDatabase(Lead leadToUpdate)
         {
             try
             {
-                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-                string storedProcedureName = "usp_UpdateLead";
+				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+				string query = "UPDATE Leads SET Lead_Name=@LeadName, Lead_Status=@LeadStatus, Lead_Email=@LeadEmail, Date=@Date, Lead_Source=@LeadSource, Phone_Number=@PhoneNumber, Notes=@Notes, Documents_ID=@DocumentsID, Interview_Date=@InterviewDate WHERE Lead_ID=@LeadID";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand command = new SqlCommand(storedProcedureName, connection);
-                    command.CommandType = CommandType.StoredProcedure;
-
-                    command.Parameters.AddWithValue("@Lead_ID", leadToUpdate.Lead_ID);
-                    command.Parameters.AddWithValue("@Lead_Name", leadToUpdate.Lead_Name ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Lead_Status", leadToUpdate.Lead_Status ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Lead_Email", leadToUpdate.Lead_Email ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Date", leadToUpdate.Date ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Lead_Source", leadToUpdate.Lead_Source ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Phone_Number", leadToUpdate.Phone_Number ?? (object)DBNull.Value);
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@LeadName", leadToUpdate.Lead_Name ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@LeadStatus", leadToUpdate.Lead_Status ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@LeadEmail", leadToUpdate.Lead_Email ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@LeadSource", leadToUpdate.Lead_Source ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@PhoneNumber", leadToUpdate.Phone_Number ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Notes", leadToUpdate.Notes ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Documents_ID", leadToUpdate.Documents_ID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Interview_Date", string.IsNullOrEmpty(leadToUpdate.Interview_Date) ? (object)DBNull.Value : leadToUpdate.Interview_Date);
+                    command.Parameters.AddWithValue("@Date", leadToUpdate.Date ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@DocumentsID", leadToUpdate.Documents_ID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@InterviewDate", string.IsNullOrEmpty(leadToUpdate.Interview_Date) ? (object)DBNull.Value : leadToUpdate.Interview_Date);
+                    command.Parameters.AddWithValue("@LeadID", leadToUpdate.Lead_ID);
 
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
@@ -358,7 +452,6 @@ namespace LeadsTracker_FinalsProject1
             }
             UpdateCounters();
         }
-
 
         protected void OnPropertyChanged(string propertyName)
         {
@@ -552,8 +645,6 @@ namespace LeadsTracker_FinalsProject1
             SaveNewLead(newLead);
         }
 
-
-
         private void SaveNewLead(Lead newLead)
         {
             try
@@ -692,7 +783,13 @@ namespace LeadsTracker_FinalsProject1
 
         private void search_LostFocus(object sender, RoutedEventArgs e)
         {
-            mag.Visibility= Visibility.Visible;
+            mag.Visibility = Visibility.Visible;
         }
+
+        private void leadList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            UpdateTextBoxes();
+        }
+
     }
 }

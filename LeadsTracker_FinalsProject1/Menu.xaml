@@ -8,9 +8,13 @@
         Title="Menu" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Background="#FF8B75B2">
     <Grid Height="434" VerticalAlignment="Bottom">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="202*"/>
+            <ColumnDefinition Width="56*"/>
+            <ColumnDefinition Width="80*"/>
+            <ColumnDefinition Width="66*"/>
             <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="225*"/>
+            <ColumnDefinition Width="68*"/>
+            <ColumnDefinition Width="64*"/>
+            <ColumnDefinition Width="93*"/>
             <ColumnDefinition Width="95*"/>
             <ColumnDefinition Width="104*"/>
             <ColumnDefinition Width="126*"/>
@@ -20,7 +24,7 @@
             <ImageBrush Opacity="0.7" ImageSource="/SouthvilleBG.jpg"/>
         </Grid.Background>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="0,21,0,0" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="3" CornerRadius="8,8,8,8">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="0,21,0,0" VerticalAlignment="Top" Width="218" Grid.ColumnSpan="5" CornerRadius="8,8,8,8">
             <Border.Background>
                 <SolidColorBrush Color="{DynamicResource SVDARKVIOLET}"/>
             </Border.Background>
@@ -31,7 +35,7 @@
             </TextBlock>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="187,21,0,0" VerticalAlignment="Top" Width="100" CornerRadius="8,8,8,8" Grid.Column="2" Grid.ColumnSpan="2">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="54" Margin="55,21,0,0" VerticalAlignment="Top" Width="100" CornerRadius="8,8,8,8" Grid.Column="6" Grid.ColumnSpan="2">
             <Border.Background>
                 <SolidColorBrush Color="{DynamicResource SVDARKVIOLET}"/>
             </Border.Background>
@@ -42,11 +46,11 @@
             </Label>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="339" Margin="0,67,0,0" VerticalAlignment="Top" Width="395" Background="White" CornerRadius="8,8,8,8"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="7" HorizontalAlignment="Left" Height="339" Margin="0,67,0,0" VerticalAlignment="Top" Width="395" Background="White" CornerRadius="8,8,8,8"/>
 
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Margin="187,66,0,28" Width="390" Background="White" CornerRadius="8,8,8,8" Grid.ColumnSpan="5"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="6" HorizontalAlignment="Left" Margin="55,66,0,28" Width="390" Background="White" CornerRadius="8,8,8,8" Grid.ColumnSpan="5"/>
 
-        <Button x:Name ="signoutButton" Content="Sign Out" HorizontalAlignment="Left" Click="signoutButton_Click" Margin="8,411,0,3" Width="50">
+        <Button x:Name ="signoutButton" Content="Sign Out" HorizontalAlignment="Left" Click="signoutButton_Click" Margin="8,411,0,3" Width="50" Grid.ColumnSpan="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="{DynamicResource GradientStopColor1}" Offset="1"/>
@@ -54,7 +58,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name ="View_Menu" Content="View Table" HorizontalAlignment="Right" Click="viewButton_Click" Margin="0,28,10,386" FontFamily="Liberation Sans" FontWeight="Bold" Grid.Column="5" Grid.ColumnSpan="2" Width="65">
+        <Button x:Name ="View_Menu" Content="View Table" HorizontalAlignment="Right" Click="viewButton_Click" Margin="0,28,10,386" FontFamily="Liberation Sans" FontWeight="Bold" Grid.Column="9" Grid.ColumnSpan="2" Width="65">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="{DynamicResource GradientStopColor2}"/>
@@ -63,13 +67,13 @@
             </Button.Background>
         </Button>
 
-        <TextBlock Text="Total Leads" FontWeight="Bold" Margin="12,68,110,343" Foreground="Black"/>
-        <TextBlock x:Name="totalCounter" Text="100" FontSize="24" Foreground="Blue" Margin="12,81,120,327" FontWeight="Bold"/>
+        <TextBlock Text="Total Leads" FontWeight="Bold" Margin="12,68,44,343" Foreground="Black" Grid.ColumnSpan="2"/>
+        <TextBlock x:Name="totalCounter" Text="100" FontSize="24" Foreground="Blue" Margin="12,81,54,327" FontWeight="Bold" Grid.ColumnSpan="2"/>
 
-        <TextBlock Text="New Leads" FontWeight="Bold" Margin="87,68,0,342" Foreground="Black" HorizontalAlignment="Left" Width="74"/>
-        <TextBlock x:Name="newCounter" Text="25" FontSize="24" Foreground="Green" Margin="92,79,64,318" FontWeight="Bold"/>
+        <TextBlock Text="New Leads" FontWeight="Bold" Margin="31,68,0,342" Foreground="Black" HorizontalAlignment="Left" Width="74" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <TextBlock x:Name="newCounter" Text="25" FontSize="24" Foreground="Green" Margin="36,79,64,318" FontWeight="Bold" Grid.ColumnSpan="2" Grid.Column="1"/>
 
-        <TextBlock x:Name="deadText" Text="Dead Leads" FontWeight="Bold" Margin="171,69,188,343" RenderTransformOrigin="0.5,0.5" Foreground="Black" Grid.ColumnSpan="3">
+        <TextBlock x:Name="deadText" Text="Dead Leads" FontWeight="Bold" Margin="35,69,31,343" RenderTransformOrigin="0.5,0.5" Foreground="Black" Grid.ColumnSpan="3" Grid.Column="2">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -79,27 +83,27 @@
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
-        <TextBlock x:Name="closedCounter" Text="50" FontSize="24" Foreground="Red" Margin="172,79,220,326" Grid.ColumnSpan="3" FontWeight="Bold"/>
+        <TextBlock x:Name="closedCounter" Text="50" FontSize="24" Foreground="Red" Margin="36,79,63,326" Grid.ColumnSpan="3" FontWeight="Bold" Grid.Column="2"/>
 
-        <TextBlock Text="Leads" FontWeight="Bold" FontSize="16" Margin="8,120,150,293" Foreground="Black"/>
+        <TextBlock Text="Leads" FontWeight="Bold" FontSize="16" Margin="8,120,4,293" Foreground="Black"/>
 
-        <ListBox x:Name="leadList" ItemsSource="{Binding Leads}" SelectedItem="{Binding SelectedLead}" Margin="8,148,57,72" Width="Auto" Grid.ColumnSpan="3" BorderBrush="Black">
+        <ListBox x:Name="leadList" ItemsSource="{Binding Leads}" SelectedItem="{Binding SelectedLead}" Margin="8,163,57,72" Width="Auto" Grid.ColumnSpan="7" BorderBrush="Black" SelectionChanged="leadList_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Lead_ID}" FontWeight="Bold" Margin="5"/>
-                        <TextBlock Text="{Binding Lead_Name}" FontWeight="Bold" Margin="5"/>
-                        <TextBlock Text="{Binding Lead_Status}" FontWeight="Bold" Margin="5"/>
+                        <TextBlock Text="{Binding Lead_ID}" FontWeight="Bold" Margin="5" Width="50"/>
+                        <TextBlock Text="{Binding Lead_Name}" FontWeight="Bold" Margin="5" Width="200"/>
+                        <TextBlock Text="{Binding Lead_Status}" FontWeight="Bold" Margin="5" Width="100"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="214,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
-        <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="214,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
-        <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="214,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="2" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
-        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="0,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="315" Height="49" Grid.Column="3" BorderBrush="Black" Grid.ColumnSpan="3"/>
-        <Button x:Name="files" Content="View Files" HorizontalAlignment="Left" Margin="64,376,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="70" Click="filesButton_Click" Grid.Column="5" Grid.ColumnSpan="2" Height="20">
+        <TextBox x:Name="nameBox" HorizontalAlignment="Left" Margin="82,93,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="6" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
+        <TextBox x:Name="emailBox" HorizontalAlignment="Left" Margin="82,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="6" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
+        <TextBox x:Name="numberBox" HorizontalAlignment="Left" Margin="82,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="6" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
+        <TextBox x:Name="notesBox" HorizontalAlignment="Left" Margin="0,308,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="315" Height="49" Grid.Column="7" BorderBrush="Black" Grid.ColumnSpan="3"/>
+        <Button x:Name="files" Content="View Files" HorizontalAlignment="Left" Margin="64,376,0,0" VerticalAlignment="Top" FontWeight="Bold" BorderBrush="Black" Width="70" Click="filesButton_Click" Grid.Column="9" Grid.ColumnSpan="2" Height="20">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -107,8 +111,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <TextBox x:Name="dateAddedBox" HorizontalAlignment="Left" Margin="214,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False" Grid.Column="2" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
-        <ComboBox x:Name="sourceBox" HorizontalAlignment="Center" Margin="0,95,0,0" VerticalAlignment="Top" Width="120" Height="24" Grid.Column="5">
+        <TextBox x:Name="dateAddedBox" HorizontalAlignment="Left" Margin="82,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False" Grid.Column="6" BorderBrush="Black" Grid.ColumnSpan="3" Height="18"/>
+        <ComboBox x:Name="sourceBox" HorizontalAlignment="Center" Margin="0,95,0,0" VerticalAlignment="Top" Width="120" Height="24" Grid.Column="9">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Facebook"/>
             <ComboBoxItem Content="Instagram"/>
@@ -116,26 +120,26 @@
             <ComboBoxItem Content="Referral"/>
             <ComboBoxItem Content="Physical ads"/>
         </ComboBox>
-        <ComboBox x:Name="statusBox" HorizontalAlignment="Center" Margin="0,152,0,0" VerticalAlignment="Top" Width="120" Grid.Column="5" Height="22">
+        <ComboBox x:Name="statusBox" HorizontalAlignment="Center" Margin="0,152,0,0" VerticalAlignment="Top" Width="120" Grid.Column="9" Height="22">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Cold"/>
             <ComboBoxItem Content="Warm"/>
             <ComboBoxItem Content="Hot"/>
             <ComboBoxItem Content="Dead"/>
         </ComboBox>
-        <TextBox x:Name="documentsBox" HorizontalAlignment="Center" Margin="0,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False" Grid.Column="5" BorderBrush="Black" Height="18"/>
-        <TextBox x:Name="interviewDateBox" HorizontalAlignment="Center" Margin="0,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="5" BorderBrush="Black" Height="18"/>
-        <TextBlock x:Name="displayID" HorizontalAlignment="Left" Margin="30,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontFamily="Tahoma" Foreground="White" Grid.Column="3" Height="29" Width="0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="33,71,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Foreground="White" Grid.Column="3" Height="16" Width="32"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,131,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="White" Grid.Column="3" Height="16" Width="29"/>
-        <TextBlock HorizontalAlignment="Left" Margin="30,181,0,0" TextWrapping="Wrap" Text="Number" VerticalAlignment="Top" Foreground="White" Grid.Column="3" Height="16" Width="44"/>
-        <TextBlock HorizontalAlignment="Left" Margin="20,236,0,0" TextWrapping="Wrap" Text="Date Added" VerticalAlignment="Top" Foreground="White" Grid.Column="3" Height="16" Width="63"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,74,0,0" TextWrapping="Wrap" Text="Source" VerticalAlignment="Top" Foreground="White" Grid.Column="5" Height="16" Width="36"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,131,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White" Grid.Column="5" Height="16" Width="32"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,182,0,0" TextWrapping="Wrap" Text="Documents ID" VerticalAlignment="Top" Foreground="White" Grid.Column="5" Height="16" Width="76"/>
-        <TextBlock HorizontalAlignment="Center" Margin="0,239,0,0" TextWrapping="Wrap" Text="Interview Date" VerticalAlignment="Top" Foreground="White" Grid.Column="5" Height="16" Width="76"/>
-        <TextBlock HorizontalAlignment="Left" Margin="46,292,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Foreground="White" Grid.Column="4" Height="16" Width="31"/>
-        <Button x:Name="save" Content="Save Changes" HorizontalAlignment="Center" Margin="0,376,0,0" VerticalAlignment="Top" Click="save_Click" RenderTransformOrigin="0.318,0.461" FontWeight="Bold" BorderBrush="Black" Width="102" Grid.Column="4" Grid.ColumnSpan="2" Height="20">
+        <TextBox x:Name="documentsBox" HorizontalAlignment="Center" Margin="0,202,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False" Grid.Column="9" BorderBrush="Black" Height="18"/>
+        <TextBox x:Name="interviewDateBox" HorizontalAlignment="Center" Margin="0,257,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="9" BorderBrush="Black" Height="18"/>
+        <TextBlock x:Name="displayID" HorizontalAlignment="Left" Margin="30,29,0,0" TextWrapping="Wrap" Text="0" Foreground="White" VerticalAlignment="Top" FontSize="25" FontWeight="Bold" Visibility="Visible" Grid.Column="7"/>
+        <TextBlock HorizontalAlignment="Left" Margin="33,71,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Foreground="White" Grid.Column="7" Height="16" Width="32"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,131,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Foreground="White" Grid.Column="7" Height="16" Width="29"/>
+        <TextBlock HorizontalAlignment="Left" Margin="30,181,0,0" TextWrapping="Wrap" Text="Number" VerticalAlignment="Top" Foreground="White" Grid.Column="7" Height="16" Width="44"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,236,0,0" TextWrapping="Wrap" Text="Date Added" VerticalAlignment="Top" Foreground="White" Grid.Column="7" Height="16" Width="63"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,74,0,0" TextWrapping="Wrap" Text="Source" VerticalAlignment="Top" Foreground="White" Grid.Column="9" Height="16" Width="36"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,131,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Foreground="White" Grid.Column="9" Height="16" Width="32"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,182,0,0" TextWrapping="Wrap" Text="Documents ID" VerticalAlignment="Top" Foreground="White" Grid.Column="9" Height="16" Width="76"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,239,0,0" TextWrapping="Wrap" Text="Interview Date" VerticalAlignment="Top" Foreground="White" Grid.Column="9" Height="16" Width="76"/>
+        <TextBlock HorizontalAlignment="Left" Margin="46,292,0,0" TextWrapping="Wrap" Text="Notes" VerticalAlignment="Top" Foreground="White" Grid.Column="8" Height="16" Width="31"/>
+        <Button x:Name="save" Content="Save Changes" HorizontalAlignment="Left" Margin="64,376,0,0" VerticalAlignment="Top" Click="save_Click" RenderTransformOrigin="0.318,0.461" FontWeight="Bold" BorderBrush="Black" Width="102" Grid.Column="8" Grid.ColumnSpan="2" Height="20">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -143,7 +147,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="addLead" Content="Add Lead" HorizontalAlignment="Center" Margin="0,376,0,0" VerticalAlignment="Top" Click="addLead_Click" Width="88" BorderBrush="Black" FontWeight="Bold" RenderTransformOrigin="0.467,0.401" Grid.Column="3" Grid.ColumnSpan="2" Height="20">
+        <Button x:Name="addLead" Content="Add Lead" HorizontalAlignment="Left" Margin="56,376,0,0" VerticalAlignment="Top" Click="addLead_Click" Width="88" BorderBrush="Black" FontWeight="Bold" RenderTransformOrigin="0.467,0.401" Grid.Column="7" Grid.ColumnSpan="2" Height="20">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="0"/>
@@ -152,7 +156,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="clear" Content="Clear" HorizontalAlignment="Left" Margin="213,376,0,0" VerticalAlignment="Top" Click="clear_Click" Width="46" BorderBrush="#FF060606" FontWeight="Bold" Grid.Column="2" Grid.ColumnSpan="2" Height="20">
+        <Button x:Name="clear" Content="Clear" HorizontalAlignment="Left" Margin="81,376,0,0" VerticalAlignment="Top" Click="clear_Click" Width="46" BorderBrush="#FF060606" FontWeight="Bold" Grid.Column="6" Grid.ColumnSpan="2" Height="20">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White" Offset="0"/>
@@ -161,8 +165,8 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="74,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="19" GotFocus="search_GotFocus" LostFocus="search_LostFocus"/>
-        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="6,121,0,0" VerticalAlignment="Top" Width="96" SelectionChanged="FilterChanged" Height="19" Grid.Column="1" Grid.ColumnSpan="2">
+        <TextBox x:Name="search" HorizontalAlignment="Left" Margin="18,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" TextChanged="search_TextChanged" Height="19" GotFocus="search_GotFocus" LostFocus="search_LostFocus" Grid.ColumnSpan="2" Grid.Column="1"/>
+        <ComboBox x:Name="sourceFilter" HorizontalAlignment="Left" Margin="6,121,0,0" VerticalAlignment="Top" Width="96" SelectionChanged="FilterChanged" Height="19" Grid.Column="3" Grid.ColumnSpan="3">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Facebook"/>
             <ComboBoxItem Content="Instagram"/>
@@ -170,16 +174,15 @@
             <ComboBoxItem Content="Referral"/>
             <ComboBoxItem Content="Physical ads"/>
         </ComboBox>
-        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="105,121,0,0" VerticalAlignment="Top" Width="63" SelectionChanged="FilterChanged" Height="19" Grid.Column="2">
+        <ComboBox x:Name="statusFilter" HorizontalAlignment="Left" Margin="37,121,0,0" VerticalAlignment="Top" Width="63" SelectionChanged="FilterChanged" Height="19" Grid.Column="5" Grid.ColumnSpan="2">
             <ComboBoxItem Content=""/>
             <ComboBoxItem Content="Cold"/>
             <ComboBoxItem Content="Warm"/>
             <ComboBoxItem Content="Hot"/>
             <ComboBoxItem Content="Dead"/>
         </ComboBox>
-        <Image HorizontalAlignment="Left" Height="100" Margin="194,198,0,0" VerticalAlignment="Top" Width="100" Grid.ColumnSpan="3"/>
-        <Image x:Name="mag" Margin="76,124,108,297" Source="th.jpg" Stretch="Fill"/>
-        <Button x:Name="removeButton" Content="Remove Lead" HorizontalAlignment="Left" Margin="152,376,0,0" VerticalAlignment="Top" Click="removeButton_Click" Width="91" BorderBrush="#FF060606" FontWeight="Bold" Grid.ColumnSpan="3" Height="20">
+        <Image x:Name="mag" Margin="20,124,42,297" Source="th.jpg" Stretch="Fill" Grid.Column="1"/>
+        <Button x:Name="removeButton" Content="Remove Lead" HorizontalAlignment="Left" Margin="16,376,0,0" VerticalAlignment="Top" Click="removeButton_Click" Width="91" BorderBrush="#FF060606" FontWeight="Bold" Grid.ColumnSpan="3" Height="20" Grid.Column="2">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFC2B2D9" Offset="1"/>
@@ -188,15 +191,18 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Content="Sort by ID" HorizontalAlignment="Left" Margin="113,376,0,0" VerticalAlignment="Top" Background="#FF4E2A6D" Foreground="White" FontWeight="Bold" Width="52" Height="16" Click="leadSort_Click" FontSize="9" Grid.Column="2" RenderTransformOrigin="0.504,0.125"/>
-        <TextBlock Text="Name" FontWeight="Bold" Margin="32,72,24,341" Foreground="Black" Grid.Column="3"/>
-        <TextBlock Text="Email" FontWeight="Bold" Margin="33,127,23,286" Foreground="Black" Grid.Column="3"/>
-        <TextBlock Text="Number" FontWeight="Bold" Margin="27,181,19,232" Foreground="Black" Grid.Column="3"/>
-        <TextBlock Text="Date Added" FontWeight="Bold" Margin="16,231,6,182" Foreground="Black" Grid.Column="3"/>
-        <TextBlock Text="Document ID" FontWeight="Bold" Margin="25,179,21,234" Foreground="Black" Grid.Column="5"/>
-        <TextBlock Text="Interview Date" FontWeight="Bold" Margin="21,231,17,182" Foreground="Black" Grid.Column="5"/>
-        <TextBlock Text="Notes" FontWeight="Bold" Margin="42,289,22,124" Foreground="Black" Grid.Column="4"/>
-        <TextBlock Text="Status" FontWeight="Bold" Margin="45,130,41,284" Foreground="Black" Grid.Column="5"/>
-        <TextBlock Text="Source" FontWeight="Bold" Margin="41,71,41,342" Foreground="Black" Grid.Column="5"/>
+        <Button Content="Sort by ID" HorizontalAlignment="Left" Margin="45,376,0,0" VerticalAlignment="Top" Background="#FF4E2A6D" Foreground="White" FontWeight="Bold" Width="52" Height="16" Click="leadSort_Click" FontSize="9" Grid.Column="5" RenderTransformOrigin="0.504,0.125" Grid.ColumnSpan="2"/>
+        <TextBlock Text="Name" FontWeight="Bold" Margin="32,72,24,341" Foreground="Black" Grid.Column="7"/>
+        <TextBlock Text="Email" FontWeight="Bold" Margin="33,127,23,286" Foreground="Black" Grid.Column="7"/>
+        <TextBlock Text="Number" FontWeight="Bold" Margin="27,181,19,232" Foreground="Black" Grid.Column="7"/>
+        <TextBlock Text="Date Added" FontWeight="Bold" Margin="16,231,6,182" Foreground="Black" Grid.Column="7"/>
+        <TextBlock Text="Document ID" FontWeight="Bold" Margin="25,179,21,234" Foreground="Black" Grid.Column="9"/>
+        <TextBlock Text="Interview Date" FontWeight="Bold" Margin="21,231,17,182" Foreground="Black" Grid.Column="9"/>
+        <TextBlock Text="Notes" FontWeight="Bold" Margin="42,289,22,124" Foreground="Black" Grid.Column="8"/>
+        <TextBlock Text="Status" FontWeight="Bold" Margin="45,130,41,284" Foreground="Black" Grid.Column="9"/>
+        <TextBlock Text="Source" FontWeight="Bold" Margin="41,71,41,342" Foreground="Black" Grid.Column="9"/>
+        <TextBlock Text="ID" FontWeight="Bold" FontSize="12" Margin="17,145,3,272" Foreground="Black"/>
+        <TextBlock Text="Name" FontWeight="Bold" FontSize="12" Margin="23,145,21,272" Foreground="Black" Grid.Column="1"/>
+        <TextBlock Text="Status" FontWeight="Bold" FontSize="12" Margin="11,145,17,272" Foreground="Black" Grid.Column="5"/>
     </Grid>
 </Window>

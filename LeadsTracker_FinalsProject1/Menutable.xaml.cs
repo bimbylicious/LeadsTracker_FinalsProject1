@@ -261,7 +261,7 @@ namespace LeadsTracker_FinalsProject1
             List<string> validSources = new List<string> { "Facebook", "Instagram", "Twitter", "Physical ads", "Referral" };
             if (!validSources.Contains(lead.Lead_Source, StringComparer.OrdinalIgnoreCase))
             {
-                MessageBox.Show("Invalid lead source. Choose from: Facebook, Instagram, Twitter, Physical ads, and Referral", "Invalid Lead Source", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Invalid lead source. Choose from: Facebook, Instagram, Twitter, Referral, and Physical ads", "Invalid Lead Source", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
             }
 
@@ -271,6 +271,67 @@ namespace LeadsTracker_FinalsProject1
             {
                 MessageBox.Show("Invalid lead status. Choose from: Cold, Warm, Hot, and Dead", "Invalid Lead Status", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return false;
+            }
+
+            // Check Phone_Number
+            if (!string.IsNullOrEmpty(lead.Phone_Number))
+            {
+                if (lead.Phone_Number.Any(char.IsLetter))
+                {
+                    MessageBox.Show("Phone number cannot contain letters.", "Invalid Phone Number", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                if (lead.Phone_Number.Length > 15)
+                {
+                    MessageBox.Show("Phone number cannot exceed 15 digits.", "Invalid Phone Number", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+            }
+
+            // Check Lead_Email
+            if (!string.IsNullOrEmpty(lead.Lead_Email))
+            {
+                // Trim leading and trailing whitespace
+                string trimmedEmail = lead.Lead_Email.Trim();
+
+                if (trimmedEmail.Contains(" "))
+                {
+                    MessageBox.Show("Email cannot contain spaces.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                if (trimmedEmail.Any(c => c > 127))
+                {
+                    MessageBox.Show("Email must only contain ASCII characters.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                if (!trimmedEmail.Contains("@"))
+                {
+                    MessageBox.Show("Email must contain '@' sign.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
+
+                string[] consecutiveSpecialCharacters = {
+            "!!", "##", "$$", "%%", "^^", "&&", "**", "((", "))", "__", "--", "==", "{{", "[[", "]]", "}}", "\\\"", ";;", "::", "''", ",,", "..", ">>", "<<", "//", "??"
+        };
+                foreach (var special in consecutiveSpecialCharacters)
+                {
+                    if (trimmedEmail.Contains(special))
+                    {
+                        MessageBox.Show("Email cannot contain consecutive special characters like '..', '::', etc.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return false;
+                    }
+                }
+
+                // Check for special characters at the beginning or end
+                char[] specialChars = { '!', '#', '$', '%', '^', '&', '*', '(', ')', '_', '-', '=', '{', '[', ']', '}', '\\', '|', ';', ':', '\'', '"', ',', '.', '<', '>', '/', '?' };
+                if (specialChars.Contains(trimmedEmail[0]) || specialChars.Contains(trimmedEmail[trimmedEmail.Length - 1]))
+                {
+                    MessageBox.Show("Email cannot start or end with special characters.", "Invalid Email", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return false;
+                }
             }
 
             // Check at least one of Email or Phone Number
@@ -287,12 +348,13 @@ namespace LeadsTracker_FinalsProject1
             return true; // Lead is valid
         }
 
+
         private void UpdateLead(Lead lead)
         {
             try
             {
-                string connectionString = " al Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-				string query = "UPDATE Leads SET Lead_Name = @Lead_Name, Lead_Email = @Lead_Email, " +
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string query = "UPDATE Leads SET Lead_Name = @Lead_Name, Lead_Email = @Lead_Email, " +
                                "Phone_Number = @Phone_Number, Lead_Source = @Lead_Source, " +
                                "Notes = @Notes, Lead_Status = @Lead_Status, Interview_Date = @Interview_Date " +
                                "WHERE Lead_ID = @Lead_ID;";
