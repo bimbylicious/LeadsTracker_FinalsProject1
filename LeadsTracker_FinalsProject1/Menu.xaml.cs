@@ -132,7 +132,11 @@ namespace LeadsTracker_FinalsProject1
 
                 // New Leads (1 week old)
                 DateTime oneWeekAgo = DateTime.Today.AddDays(-7);
-                int newLeadsCount = Leads.Count(lead => DateTime.Parse(lead.Date) >= oneWeekAgo);
+                int newLeadsCount = Leads.Count(lead =>
+                {
+                    DateTime leadDate;
+                    return DateTime.TryParse(lead.Date, out leadDate) && leadDate >= oneWeekAgo;
+                });
                 newCounter.Text = newLeadsCount.ToString();
 
                 // Closed Leads (Lead_Status = Dead)
@@ -147,6 +151,7 @@ namespace LeadsTracker_FinalsProject1
                 closedCounter.Text = "0";
             }
         }
+
 
         private void FilterChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -315,22 +320,24 @@ namespace LeadsTracker_FinalsProject1
         {
             try
             {
-				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-				string query = "UPDATE Leads SET Lead_Name=@LeadName, Lead_Status=@LeadStatus, Lead_Email=@LeadEmail, Date=@Date, Lead_Source=@LeadSource, Phone_Number=@PhoneNumber, Notes=@Notes, Documents_ID=@DocumentsID, Interview_Date=@InterviewDate WHERE Lead_ID=@LeadID";
+                string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+                string storedProcedureName = "usp_UpdateLead";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand command = new SqlCommand(query, connection);
-                    command.Parameters.AddWithValue("@LeadName", leadToUpdate.Lead_Name ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@LeadStatus", leadToUpdate.Lead_Status ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@LeadEmail", leadToUpdate.Lead_Email ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@LeadSource", leadToUpdate.Lead_Source ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@PhoneNumber", leadToUpdate.Phone_Number ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Notes", leadToUpdate.Notes ?? (object)DBNull.Value);
+                    SqlCommand command = new SqlCommand(storedProcedureName, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@Lead_ID", leadToUpdate.Lead_ID);
+                    command.Parameters.AddWithValue("@Lead_Name", leadToUpdate.Lead_Name ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Lead_Status", leadToUpdate.Lead_Status ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Lead_Email", leadToUpdate.Lead_Email ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@Date", leadToUpdate.Date ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@DocumentsID", leadToUpdate.Documents_ID ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@InterviewDate", string.IsNullOrEmpty(leadToUpdate.Interview_Date) ? (object)DBNull.Value : leadToUpdate.Interview_Date);
-                    command.Parameters.AddWithValue("@LeadID", leadToUpdate.Lead_ID);
+                    command.Parameters.AddWithValue("@Lead_Source", leadToUpdate.Lead_Source ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Phone_Number", leadToUpdate.Phone_Number ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Notes", leadToUpdate.Notes ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Documents_ID", leadToUpdate.Documents_ID ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Interview_Date", string.IsNullOrEmpty(leadToUpdate.Interview_Date) ? (object)DBNull.Value : leadToUpdate.Interview_Date);
 
                     connection.Open();
                     int rowsAffected = command.ExecuteNonQuery();
@@ -351,6 +358,7 @@ namespace LeadsTracker_FinalsProject1
             }
             UpdateCounters();
         }
+
 
         protected void OnPropertyChanged(string propertyName)
         {
