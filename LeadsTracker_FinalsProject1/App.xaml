@@ -6,5 +6,6 @@
     <Application.Resources>
          
         <Color x:Key="GradientStopColor1">#FFC2B2D9</Color>
+        <Color x:Key="SVDARKVIOLET">#FF6055A1</Color>
     </Application.Resources>
 </Application>

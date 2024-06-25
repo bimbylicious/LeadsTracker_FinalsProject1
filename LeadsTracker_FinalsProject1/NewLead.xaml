@@ -6,12 +6,28 @@
         xmlns:local="clr-namespace:LeadsTracker_FinalsProject1"
         mc:Ignorable="d"
         Title="NewLead" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
-    <Grid Background="#FF8B75B2">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/SouthvilleBG.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="224*"/>
             <ColumnDefinition Width="561*"/>
             <ColumnDefinition Width="15*"/>
         </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="47" Margin="10,44,0,0" VerticalAlignment="Top" Width="320" CornerRadius="8,8,8,8">
+            <Border.Background>
+                <SolidColorBrush Color="{DynamicResource SVDARKVIOLET}"/>
+            </Border.Background>
+            <Label x:Name="Create_New_Lead" Content="CREATE NEW LEAD" HorizontalAlignment="Left" VerticalAlignment="Top" Width="276" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="24" Foreground="White" Background="{x:Null}" Margin="27,-1,0,0">
+                <Label.Effect>
+                    <DropShadowEffect/>
+                </Label.Effect>
+            </Label>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="308" Margin="162,85,0,0" VerticalAlignment="Top" Width="476" CornerRadius="8,8,8,8" Background="White"/>
+
         <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="51">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -20,21 +36,21 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <TextBox HorizontalAlignment="Left" Margin="194,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" Margin="194,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" Margin="194,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2"/>
-        <TextBox HorizontalAlignment="Left" Margin="223,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-        <TextBox HorizontalAlignment="Left" Margin="223,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-        <TextBox HorizontalAlignment="Left" Margin="223,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-        <TextBox Margin="39,294,249,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="50" Grid.Column="1"/>
-        <Label Content="Lead Name:" HorizontalAlignment="Left" Margin="2,86,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1" Width="90" HorizontalContentAlignment="Center"/>
-        <Label Content="Lead Source:" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" Foreground="White" Width="94" Grid.Column="1" HorizontalContentAlignment="Center"/>
-        <Label Content="Lead Email:" HorizontalAlignment="Left" Margin="4,195,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1" Width="84" HorizontalContentAlignment="Center"/>
-        <Label Content="Phone Number:" HorizontalAlignment="Left" Margin="242,86,0,0" VerticalAlignment="Top" Grid.Column="1" Foreground="White" Width="116" HorizontalContentAlignment="Center"/>
-        <Label Content="Interview Date:" HorizontalAlignment="Left" Margin="245,203,0,0" VerticalAlignment="Top" Grid.Column="1" Foreground="White" Width="110" HorizontalContentAlignment="Center"/>
-        <Label Content="Lead Status:" HorizontalAlignment="Left" Margin="255,146,0,0" VerticalAlignment="Top" Grid.Column="1" Foreground="White" Width="90" HorizontalContentAlignment="Center"/>
-        <Label Content="Notes" HorizontalAlignment="Left" Margin="155,268,0,0" VerticalAlignment="Top" Grid.Column="1" Foreground="White"/>
-        <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="139,368,0,0" VerticalAlignment="Top" Click="Button_Click" Width="74" Grid.Column="1" Height="26" BorderBrush="Black" FontWeight="Bold">
+        <TextBox HorizontalAlignment="Left" Margin="194,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2" BorderBrush="Black"/>
+        <TextBox HorizontalAlignment="Left" Margin="194,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2" BorderBrush="Black"/>
+        <TextBox HorizontalAlignment="Left" Margin="194,226,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="153" Grid.ColumnSpan="2" BorderBrush="Black"/>
+        <TextBox HorizontalAlignment="Left" Margin="223,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Grid.Column="1" BorderBrush="Black"/>
+        <TextBox HorizontalAlignment="Left" Margin="223,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Grid.Column="1" BorderBrush="Black"/>
+        <TextBox HorizontalAlignment="Left" Margin="223,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="154" Grid.Column="1" BorderBrush="Black"/>
+        <TextBox Margin="40,277,249,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="50" Grid.Column="1" BorderBrush="Black"/>
+        <Label Content="Lead Name:" HorizontalAlignment="Left" Margin="2,86,0,0" VerticalAlignment="Top" Foreground="Black" Grid.Column="1" Width="90" HorizontalContentAlignment="Center"/>
+        <Label Content="Lead Source:" HorizontalAlignment="Left" Margin="0,141,0,0" VerticalAlignment="Top" Width="94" Grid.Column="1" HorizontalContentAlignment="Center"/>
+        <Label Content="Lead Email:" HorizontalAlignment="Left" Margin="4,195,0,0" VerticalAlignment="Top" Grid.Column="1" Width="84" HorizontalContentAlignment="Center"/>
+        <Label Content="Phone Number:" HorizontalAlignment="Left" Margin="242,86,0,0" VerticalAlignment="Top" Grid.Column="1" Width="116" HorizontalContentAlignment="Center"/>
+        <Label Content="Interview Date:" HorizontalAlignment="Left" Margin="245,203,0,0" VerticalAlignment="Top" Grid.Column="1" Width="110" HorizontalContentAlignment="Center"/>
+        <Label Content="Lead Status:" HorizontalAlignment="Left" Margin="255,146,0,0" VerticalAlignment="Top" Grid.Column="1" Foreground="Black" Width="90" HorizontalContentAlignment="Center"/>
+        <Label Content="Notes" HorizontalAlignment="Left" Margin="155,251,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button x:Name="SaveBtn" Content="Save" HorizontalAlignment="Left" Margin="139,349,0,0" VerticalAlignment="Top" Click="Button_Click" Width="74" Grid.Column="1" Height="26" BorderBrush="Black" FontWeight="Bold">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="White"/>
@@ -42,11 +58,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Label x:Name="Create_New_Lead" Content="CREATE NEW LEAD" HorizontalAlignment="Left" Margin="38,39,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1" Width="276" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="24" Background="Transparent">
-            <Label.Effect>
-                <DropShadowEffect/>
-            </Label.Effect>
-        </Label>
 
     </Grid>
 </Window>
