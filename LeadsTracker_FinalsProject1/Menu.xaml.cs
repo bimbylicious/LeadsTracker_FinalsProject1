@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Globalization;
@@ -37,14 +38,16 @@ namespace LeadsTracker_FinalsProject1
             InitializeComponent();
             LoadData(); // Load data into the ListBox
             DataContext = this; // Set DataContext for data binding
-            //if (MainWindow.isAdmin)
-            //{
-            //    removeButton.Visibility = Visibility.Collapsed;
-            //}
-            //else
-            //{
-            //    removeButton.Visibility = Visibility.Visible;
-            //}
+            if (MainWindow.isAdmin)
+            {
+                closedCounter.Visibility = Visibility.Collapsed;
+                deadText.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                closedCounter.Visibility = Visibility.Visible;
+                deadText.Visibility = Visibility.Visible;
+            }
         }
 
         public ObservableCollection<Lead> Leads
@@ -73,7 +76,7 @@ namespace LeadsTracker_FinalsProject1
             try
             {
 				string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-				string query = "SELECT Lead_ID, Date, Lead_Name, Lead_Status, Lead_Email, Phone_Number, Lead_Source, Notes, Documents_ID, Interview_Date FROM Leads;";
+				string query = "SELECT * FROM vw_Leads;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -207,11 +210,12 @@ namespace LeadsTracker_FinalsProject1
             try
             {
                 string connectionString = "Data Source=DESKTOP-F726TKR\\SQLEXPRESS;Initial Catalog=\"Lead Tracker\";Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-                string query = "UPDATE Leads SET Lead_Status = 'Dead' WHERE Lead_ID = @Lead_ID;";
+                string storedProcedureName = "usp_MarkLeadAsDead";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlCommand command = new SqlCommand(storedProcedureName, connection);
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@Lead_ID", leadID);
 
                     connection.Open();
@@ -225,6 +229,7 @@ namespace LeadsTracker_FinalsProject1
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
+
 
         private void UpdateTextBoxes()
         {
@@ -344,6 +349,7 @@ namespace LeadsTracker_FinalsProject1
             {
                 MessageBox.Show("An error occurred while saving changes to the database: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            UpdateCounters();
         }
 
         protected void OnPropertyChanged(string propertyName)
@@ -669,6 +675,16 @@ namespace LeadsTracker_FinalsProject1
             }
 
             return document;
+        }
+
+        private void search_GotFocus(object sender, RoutedEventArgs e)
+        {
+            mag.Visibility = Visibility.Hidden;
+        }
+
+        private void search_LostFocus(object sender, RoutedEventArgs e)
+        {
+            mag.Visibility= Visibility.Visible;
         }
     }
 }

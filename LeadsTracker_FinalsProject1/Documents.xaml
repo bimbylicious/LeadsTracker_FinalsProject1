@@ -12,7 +12,7 @@
             <ColumnDefinition Width="49*"/>
         </Grid.ColumnDefinitions>
         <Grid.Background>
-            <ImageBrush ImageSource="/SouthvilleBG.jpg"/>
+            <ImageBrush Opacity="0.7" ImageSource="/SouthvilleBG.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="84*"/>
@@ -185,6 +185,16 @@
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="79,15,0,0" Grid.Row="5" VerticalAlignment="Top" Width="100"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="332,15,0,0" Grid.Row="5" VerticalAlignment="Top" Width="100"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="97" Margin="55,15,0,0" Grid.Row="5" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
-        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="50,0,0,0" VerticalAlignment="Center" Click="backButton_Click"/>
+        <Button x:Name="backButton" Content="Back" HorizontalAlignment="Left" Margin="31,29,0,0" VerticalAlignment="Top" BorderBrush="White" Width="73" Height="23"  Click="backButton_Click" Tag="LeadPicture" Foreground="White" FontWeight="Bold">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <SolidColorBrush Color="{DynamicResource SVDARKVIOLET}"/>
+            </Button.Background>
+        </Button>
+
     </Grid>
 </Window>

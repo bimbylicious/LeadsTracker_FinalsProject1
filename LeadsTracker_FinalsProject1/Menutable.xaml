@@ -8,7 +8,7 @@
         Title="Menutable" Height="650" Width="1500" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="/SouthvilleBG.jpg"/>
+            <ImageBrush Opacity="0.7" ImageSource="/SouthvilleBG.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="713*"/>
@@ -34,15 +34,15 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lead ID" Width="100" Binding="{Binding Lead_ID}" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Date" Width="100" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Date" Width="115" Binding="{Binding Date}"/>
                 <DataGridTextColumn Header="Lead Source" Width="130" Binding="{Binding Lead_Source}"/>
                 <DataGridTextColumn Header="Lead Name" Width="150" Binding="{Binding Lead_Name}"/>
                 <DataGridTextColumn Header="Lead Email" Width="230" Binding="{Binding Lead_Email}"/>
-                <DataGridTextColumn Header="Phone Number" Width="170" Binding="{Binding Phone_Number}"/>
+                <DataGridTextColumn Header="Phone Number" Width="140" Binding="{Binding Phone_Number}"/>
                 <DataGridTextColumn Header="Notes" Width="300" Binding="{Binding Notes}"/>
                 <DataGridTextColumn Header="Documents ID" Binding="{Binding Documents_ID}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Lead Status" Width="80" Binding="{Binding Lead_Status}"/>
-                <DataGridTextColumn Header="Interview Date" Width="150" Binding="{Binding Interview_Date}"/>
+                <DataGridTextColumn Header="Interview Date" Width="165" Binding="{Binding Interview_Date}"/>
             </DataGrid.Columns>
         </DataGrid>
 
